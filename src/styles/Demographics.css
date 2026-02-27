@@ -1,0 +1,127 @@
+.demographics-page {
+    padding: 25px;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+.demo-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.demo-table thead th {
+    background-color: #f1f5f9;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    color: #475569;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+}
+
+.demo-table tbody tr {
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.demo-table tbody tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.demo-table td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #334155;
+    /* border-bottom: 1px solid #e2e8f0; */
+}
+
+.demo-table td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.demo-table td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.demo-table td.actions-cell {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.demo-table-wrapper {
+  max-height: 320px; /* Approx height for 5 rows */
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+/* Optional: make scrollbars cleaner */
+.demo-table-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+.demo-table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 6px;
+}
+
+
+.edit-btn,
+.delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.edit-btn {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
+.edit-btn:hover {
+    background-color: #bae6fd;
+    color: #0369a1;
+}
+
+.delete-btn {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.delete-btn:hover {
+    background-color: #fecaca;
+    color: #991b1b;
+}
+
+.add-btn {
+    margin-top: 8px;
+    padding: 8px 16px;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-btn:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+.demo-select {
+    margin-top: 8px;
+    margin-left: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+}

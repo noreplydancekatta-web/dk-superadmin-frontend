@@ -1,0 +1,84 @@
+/* Entirely scoped to studio-report to prevent conflicts */
+
+.studio-report-container {
+  padding: 30px;
+  background-color: #f9fafb;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.studio-report-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.studio-report-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.studio-report-form-box {
+  background: #fff;
+  padding: 22px 26px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.studio-report-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.studio-report-form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.studio-report-form-group input[type="date"],
+.studio-report-form-group select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 14px;
+  transition: border 0.3s ease;
+  color: #0f172a;
+
+}
+
+.studio-report-form-group input[type="date"]:focus,
+.studio-report-form-group select:focus {
+  border-color: #3e74fb;
+  box-shadow: 0 0 0 2px rgba(62, 116, 251, 0.2);
+  outline: none;
+}
+.studio-report-form-group input[type="date"]:hover,
+.studio-report-form-group select:hover {
+  border-color: #3e74fb;
+}
+
+.studio-report-download-btn {
+  background-color: #3e74fb;
+  color: #fff;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: flex-start;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.studio-report-download-btn:hover {
+  background-color: #1c5bfc;
+  transform: translateY(-2px);
+}
