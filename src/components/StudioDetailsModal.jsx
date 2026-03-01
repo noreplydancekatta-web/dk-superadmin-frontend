@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../styles/StudioDetailsModal.css";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
-// import AadharFront from "../assets/aadhar-front.png";
-// import AadharBack from "../assets/aadhar-back.png";
-// import Studio1 from "../assets/studio1.jpeg";
-// import Studio2 from "../assets/studio2.jpg";
-// import Studio3 from "../assets/studio3.jpg";
-// import Studio4 from "../assets/studio4.jpg";
-// import Studio5 from "../assets/studio5.jpg";
-// import Studio6 from "../assets/studio6.jpg";
 
 const StudioDetailsModal = ({ isOpen, onClose, studio, onSaveStatus }) => {
   const [statusChecked, setStatusChecked] = useState(false);
@@ -80,11 +72,11 @@ useEffect(() => {
         {studio.logoUrl && (
           <div className="studio-logo-section">
             <img
-              src={`${BACKEND_URL}${studio.logoUrl}`}
+              src={studio.logoUrl}
               alt="Studio Logo"
               className="studio-logo"
               onClick={() =>
-                handleImageClick(`${BACKEND_URL}${studio.logoUrl}`)
+                handleImageClick(`{studio.logoUrl}`)
               }
               style={{
                 width: "120px",
@@ -179,14 +171,14 @@ useEffect(() => {
             src={`${BACKEND_URL}${studio.aadharFrontPhoto}`}
             alt="Aadhar Front"
             onClick={() =>
-              handleImageClick(`${BACKEND_URL}${studio.aadharFrontPhoto}`)
+              handleImageClick(`{studio.aadharFrontPhoto}`)
             }
           />
           <img
             src={`${BACKEND_URL}${studio.aadharBackPhoto}`}
             alt="Aadhar Back"
             onClick={() =>
-              handleImageClick(`${BACKEND_URL}${studio.aadharBackPhoto}`)
+              handleImageClick(`{studio.aadharBackPhoto}`)
             }
           />
         </div>
@@ -198,9 +190,9 @@ useEffect(() => {
               studio.studioPhotos.map((img, index) => (
                 <img
                   key={index}
-                  src={`${BACKEND_URL}${img}`} // prepend backend URL
+                  src={`{img}`} // prepend backend URL
                   alt={`Studio ${index + 1}`}
-                  onClick={() => handleImageClick(`${BACKEND_URL}${img}`)}
+                  onClick={() => handleImageClick(`{img}`)}
                   style={{
                     width: "240px",
                     height: "200px",
