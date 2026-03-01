@@ -151,7 +151,7 @@ const Demographics = () => {
                   <td>
                     {item.imageUrl ? (
                       <img
-                        src={`${BACKEND_URL}${item.imageUrl}`}
+                        src={item.imageUrl}
                         alt={item.name}
                         style={{
                           width: '30px',
