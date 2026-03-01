@@ -44,7 +44,7 @@ const UserDetailsModal = ({ isOpen, onClose, user, onSaveStatus }) => {
         {user.profilePhoto && (
           <div className="profile-photo-wrapper">
             <img
-              src={`${BACKEND_URL}${user.profilePhoto}`}
+              src={`${user.profilePhoto}`}
               alt="Profile"
               className="profile-photo"
             />
