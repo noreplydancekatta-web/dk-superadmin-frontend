@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../styles/StudioDetailsModal.css";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-
 
 const StudioDetailsModal = ({ isOpen, onClose, studio, onSaveStatus }) => {
   const [statusChecked, setStatusChecked] = useState(false);
   const [actionLabel, setActionLabel] = useState("");
-  const [actionTheme, setActionTheme] = useState(""); // 'green' or 'red'
+  const [actionTheme, setActionTheme] = useState("");
   const [enlargedImage, setEnlargedImage] = useState(null);
 
   const handleImageClick = (src) => {
@@ -19,7 +17,7 @@ const StudioDetailsModal = ({ isOpen, onClose, studio, onSaveStatus }) => {
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     if (!studio) return;
 
     const status = studio.status;
@@ -59,8 +57,6 @@ useEffect(() => {
     if (onSaveStatus) onSaveStatus(studio, newStatus);
   };
 
-  // const studioImages = [Studio1, Studio2, Studio3, Studio4, Studio5, Studio6];
-
   return (
     <div className="studio-modal-overlay">
       <div className="studio-modal">
@@ -69,15 +65,14 @@ useEffect(() => {
           ×
         </button>
 
+        {/* Logo */}
         {studio.logoUrl && (
           <div className="studio-logo-section">
             <img
               src={studio.logoUrl}
               alt="Studio Logo"
               className="studio-logo"
-              onClick={() =>
-                handleImageClick(`{studio.logoUrl}`)
-              }
+              onClick={() => handleImageClick(studio.logoUrl)}
               style={{
                 width: "120px",
                 height: "120px",
@@ -90,99 +85,64 @@ useEffect(() => {
           </div>
         )}
 
-
         <h3>Basic Information</h3>
         <div className="studio-details-grid">
-          <div>
-            <strong>Name:</strong> {studio.studioName}
-          </div>
-          <div>
-            <strong>Owner:</strong> {studio.ownerId}
-          </div>
-          <div>
-            <strong>Status:</strong> {studio.status}
-          </div>
-          <div>
-            <strong>Introduction:</strong> {studio.studioIntroduction}
-          </div>
+          <div><strong>Name:</strong> {studio.studioName}</div>
+          <div><strong>Owner:</strong> {studio.ownerId}</div>
+          <div><strong>Status:</strong> {studio.status}</div>
+          <div><strong>Introduction:</strong> {studio.studioIntroduction}</div>
         </div>
 
         <h3>Contact Information</h3>
         <div className="studio-details-grid">
-          <div>
-            <strong>Email:</strong> {studio.contactEmail}
-          </div>
-          <div>
-            <strong>Contact:</strong> {studio.contactNumber}
-          </div>
-          <div>
-            <strong>Address:</strong> {studio.registeredAddress}
-          </div>
+          <div><strong>Email:</strong> {studio.contactEmail}</div>
+          <div><strong>Contact:</strong> {studio.contactNumber}</div>
+          <div><strong>Address:</strong> {studio.registeredAddress}</div>
         </div>
 
         <h3>Bank & Legal Information</h3>
         <div className="studio-details-grid">
-          <div>
-            <strong>GST No:</strong> {studio.gstNumber}
-          </div>
-          <div>
-            <strong>PAN No:</strong> {studio.panNumber}
-          </div>
-          <div>
-            <strong>Aadhar No:</strong> {studio.aadharNumber}
-          </div>
-          <div>
-            <strong>Bank Acc No:</strong> {studio.bankAccountNumber}
-          </div>
-          <div>
-            <strong>Bank IFSC:</strong> {studio.bankIfscCode}
-          </div>
+          <div><strong>GST No:</strong> {studio.gstNumber}</div>
+          <div><strong>PAN No:</strong> {studio.panNumber}</div>
+          <div><strong>Aadhar No:</strong> {studio.aadharNumber}</div>
+          <div><strong>Bank Acc No:</strong> {studio.bankAccountNumber}</div>
+          <div><strong>Bank IFSC:</strong> {studio.bankIfscCode}</div>
         </div>
 
         <h3>Social Media Links</h3>
         <div className="studio-details-grid">
-          <div>
-            <strong>Website:</strong> {studio.studioWebsite}
-          </div>
-          <div>
-            <strong>Facebook:</strong> {studio.studioFacebook}
-          </div>
-          <div>
-            <strong>Instagram:</strong> {studio.studioInstagram}
-          </div>
-          <div>
-            <strong>YouTube:</strong> {studio.studioYoutube}
-          </div>
+          <div><strong>Website:</strong> {studio.studioWebsite}</div>
+          <div><strong>Facebook:</strong> {studio.studioFacebook}</div>
+          <div><strong>Instagram:</strong> {studio.studioInstagram}</div>
+          <div><strong>YouTube:</strong> {studio.studioYoutube}</div>
         </div>
 
         <h3>Application Timeline</h3>
         <div className="studio-details-grid">
-          <div>
-            <strong>Created At:</strong> {studio.createdAt}
-          </div>
-          <div>
-            <strong>Updated At:</strong> {studio.updatedAt}
-          </div>
+          <div><strong>Created At:</strong> {studio.createdAt}</div>
+          <div><strong>Updated At:</strong> {studio.updatedAt}</div>
         </div>
 
+        {/* Aadhar Images */}
         <div className="aadhar-section">
           <h3>Aadhar Card Images</h3>
-          <img
-            src={`${BACKEND_URL}${studio.aadharFrontPhoto}`}
-            alt="Aadhar Front"
-            onClick={() =>
-              handleImageClick(`{studio.aadharFrontPhoto}`)
-            }
-          />
-          <img
-            src={`${BACKEND_URL}${studio.aadharBackPhoto}`}
-            alt="Aadhar Back"
-            onClick={() =>
-              handleImageClick(`{studio.aadharBackPhoto}`)
-            }
-          />
+          {studio.aadharFrontPhoto && (
+            <img
+              src={studio.aadharFrontPhoto}
+              alt="Aadhar Front"
+              onClick={() => handleImageClick(studio.aadharFrontPhoto)}
+            />
+          )}
+          {studio.aadharBackPhoto && (
+            <img
+              src={studio.aadharBackPhoto}
+              alt="Aadhar Back"
+              onClick={() => handleImageClick(studio.aadharBackPhoto)}
+            />
+          )}
         </div>
 
+        {/* Studio Photos */}
         <div className="studio-photos-section">
           <h3>Studio Photos</h3>
           <div className="studio-images-grid">
@@ -190,9 +150,9 @@ useEffect(() => {
               studio.studioPhotos.map((img, index) => (
                 <img
                   key={index}
-                  src={`{img}`} // prepend backend URL
+                  src={img}
                   alt={`Studio ${index + 1}`}
-                  onClick={() => handleImageClick(`{img}`)}
+                  onClick={() => handleImageClick(img)}
                   style={{
                     width: "240px",
                     height: "200px",
@@ -209,6 +169,7 @@ useEffect(() => {
           </div>
         </div>
 
+        {/* Status Section */}
         <div className={`status-action-section ${actionTheme}`}>
           <label>
             <input
@@ -218,10 +179,12 @@ useEffect(() => {
             />{" "}
             {actionLabel}
           </label>
-        <p className="status-warning">
+
+          <p className="status-warning">
             {studio.status === "Pending" &&
               "Check to approve this studio (Studio will be visible to all users on DanceKatta)."}
-            {studio.status === "Approved" && "Check to disable this studio."}
+            {studio.status === "Approved" &&
+              "Check to disable this studio."}
             {studio.status === "Disabled" &&
               "Uncheck to re-activate this studio (set to Approved)."}
           </p>
@@ -237,9 +200,14 @@ useEffect(() => {
         </div>
       </div>
 
+      {/* Enlarged Image View */}
       {enlargedImage && (
         <div className="enlarged-image-overlay" onClick={handleCloseEnlarged}>
-          <img src={enlargedImage} alt="Enlarged" className="enlarged-image" />
+          <img
+            src={enlargedImage}
+            alt="Enlarged"
+            className="enlarged-image"
+          />
         </div>
       )}
     </div>
