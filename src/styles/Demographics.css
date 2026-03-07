@@ -4,6 +4,10 @@
     min-height: 100vh;
 }
 
+.demo-title{
+    color: #333
+}
+
 .demo-table {
     width: 100%;
     border-collapse: separate;
