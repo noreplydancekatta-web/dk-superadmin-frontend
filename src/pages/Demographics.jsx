@@ -133,7 +133,7 @@ const Demographics = () => {
 
   const renderTable = (title, data, tableKey, isObject = false, hasParent = false) => (
     <>
-      <h3>{title}</h3>
+      <h3 className="demo-title">{title}</h3>
       <div className="demo-table-wrapper">
         <table className="demo-table">
           <thead>
