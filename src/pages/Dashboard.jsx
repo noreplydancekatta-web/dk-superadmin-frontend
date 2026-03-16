@@ -57,7 +57,14 @@ function Dashboard() {
 
   const revenue = transactions
     .filter(t => t.paymentDetails?.paymentStatus === "Success")
-    .reduce((sum, t) => sum + (t.paymentDetails?.amountPaid || 0), 0);
+    .reduce((sum, t) => {
+      const amount = t.paymentDetails?.amountPaid || 0;
+      const platformFeePercent = t.paymentDetails?.platformFeePercent || 0;
+
+      const platformRevenue = (amount * platformFeePercent) / 100;
+
+      return sum + platformRevenue;
+    }, 0);
 
   return (
     <div className="dashboard">
@@ -110,11 +117,11 @@ function Dashboard() {
           <h3>
             {
               transactions.length === 0
-              ? "0%"
-              :
-              `${Math.round(
-                (transactions.filter(t => t.couponCode).length / transactions.length) * 100
-              )}%`
+                ? "0%"
+                :
+                `${Math.round(
+                  (transactions.filter(t => t.couponCode).length / transactions.length) * 100
+                )}%`
             }
           </h3>
         </div>
@@ -133,7 +140,7 @@ function Dashboard() {
       </div>
 
       <div className="revenue-section">
-        <RevenueChart transactions={transactions}/>
+        <RevenueChart transactions={transactions} />
       </div>
 
     </div>
