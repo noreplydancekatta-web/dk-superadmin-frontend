@@ -11,11 +11,16 @@ function Dashboard() {
   const [users, setUsers] = useState([]);
   const [studios, setStudios] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [metrics, setMetrics] = useState({
+    totalTurnover: 0,
+    platformRevenue: 0
+  });
 
   useEffect(() => {
     fetchUsers();
     fetchStudios();
     fetchTransactions();
+    fetchMetrics();
   }, []);
 
   // USERS
@@ -45,6 +50,15 @@ function Dashboard() {
       setTransactions(res.data);
     } catch (err) {
       console.error("Error fetching transactions:", err);
+    }
+  };
+
+  const fetchMetrics = async () => {
+    try {
+      const res = await API.get('/api/transactions/dashboard-metrics');
+      setMetrics(res.data);
+    } catch (err) {
+      console.error("Error fetching metrics:", err);
     }
   };
 
@@ -129,8 +143,13 @@ function Dashboard() {
 
         {/* Revenue */}
         <div className="card">
-          <p>Revenue</p>
-          <h3>₹{revenue.toLocaleString()}</h3>
+          <p>Platform Revenue</p>
+          <h3>₹{metrics.platformRevenue.toLocaleString()}</h3>
+        </div>
+
+        <div className="card">
+          <p>Total Turnover</p>
+          <h3>₹{metrics.totalTurnover.toLocaleString()}</h3>
         </div>
 
       </div>
