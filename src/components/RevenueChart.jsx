@@ -2,24 +2,42 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import '../styles/RevenueChart.css';
 
-// Register chart components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const RevenueChart = () => {
-  // Dummy Data for past 12 months
+const RevenueChart = ({ transactions }) => {
+
+  // Months for chart
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Initialize monthly revenue array
+  const monthlyRevenue = new Array(12).fill(0);
+
+  // Filter successful transactions
+  const successfulTransactions = transactions.filter(t => t.status === "Success");
+
+  // Aggregate revenue by month
+  successfulTransactions.forEach(t => {
+    const date = new Date(t.transactionDate);
+    const monthIndex = date.getMonth();
+
+    const amount = t.paymentDetails?.amountPaid || 0;
+
+    monthlyRevenue[monthIndex] += amount;
+  });
+
   const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    labels: months,
     datasets: [
       {
-        label: 'Revenue (₹)',
-        data: [5000, 7000, 8000, 6000, 9000, 11000, 12000, 10000, 9500, 13000, 12500, 14000],
+        label: 'Total Turnover (₹)',
+        data: monthlyRevenue,
         borderColor: '#007bff',
-        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+        backgroundColor: 'rgba(0, 123, 255, 0.15)',
         tension: 0.4,
         fill: true,
         pointBackgroundColor: '#007bff',
         pointBorderColor: '#007bff'
-      },
+      }
     ],
   };
 
@@ -27,21 +45,14 @@ const RevenueChart = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        position: 'top',
-      },
-      tooltip: {
-        mode: 'index',
-        intersect: false,
-      },
+      legend: { position: 'top' },
+      tooltip: { mode: 'index', intersect: false }
     },
     scales: {
       y: {
         beginAtZero: true,
         ticks: {
-          callback: function(value) {
-            return '₹' + value;
-          }
+          callback: (value) => '₹' + value
         }
       }
     }
