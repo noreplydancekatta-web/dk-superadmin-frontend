@@ -6,37 +6,50 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const RevenueChart = ({ transactions }) => {
 
-  // Months for chart
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-  // Initialize monthly revenue array
-  const monthlyRevenue = new Array(12).fill(0);
+  const monthlyTurnover = new Array(12).fill(0);
+  const monthlyPlatformRevenue = new Array(12).fill(0);
 
-  // Filter successful transactions
   const successfulTransactions = transactions.filter(t => t.status === "Success");
 
-  // Aggregate revenue by month
   successfulTransactions.forEach(t => {
     const date = new Date(t.transactionDate);
     const monthIndex = date.getMonth();
 
     const amount = t.paymentDetails?.amountPaid || 0;
 
-    monthlyRevenue[monthIndex] += amount;
+    const feePercent =
+      t.platformFeePercent ??
+      t.paymentDetails?.platformFeePercent ??
+      0;
+
+    const platformRevenue = (amount * feePercent) / 100;
+
+    monthlyTurnover[monthIndex] += amount;
+    monthlyPlatformRevenue[monthIndex] += platformRevenue;
   });
 
   const data = {
     labels: months,
     datasets: [
       {
-        label: 'Total Turnover (₹)',
-        data: monthlyRevenue,
+        label: 'Total Turnover',
+        data: monthlyTurnover,
         borderColor: '#007bff',
-        backgroundColor: 'rgba(0, 123, 255, 0.15)',
+        backgroundColor: 'rgba(0,123,255,0.15)',
         tension: 0.4,
         fill: true,
-        pointBackgroundColor: '#007bff',
-        pointBorderColor: '#007bff'
+        pointBackgroundColor: '#007bff'
+      },
+      {
+        label: 'Platform Revenue',
+        data: monthlyPlatformRevenue,
+        borderColor: '#28a745',
+        backgroundColor: 'rgba(40,167,69,0.15)',
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#28a745'
       }
     ],
   };
@@ -52,7 +65,7 @@ const RevenueChart = ({ transactions }) => {
       y: {
         beginAtZero: true,
         ticks: {
-          callback: (value) => '₹' + value
+          callback: value => '₹' + value
         }
       }
     }
