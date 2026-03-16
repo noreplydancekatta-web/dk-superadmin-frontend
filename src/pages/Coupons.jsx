@@ -111,14 +111,14 @@ function Coupons() {
 
     const studio = studios.find(s => s.contactEmail === studioEmail);
     const couponData = {
-      CouponCode: code,
-      CouponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
-      DiscountPercent: Number(value),
-      StudioID: type === "Studio Specific" ? String(studio?._id) : null,
-      StartDate: new Date(startDate),
-      ExpiryDate: new Date(endDate),
-      isActive: true,
-    };
+  couponCode: code.toUpperCase().trim(),
+  couponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
+  discountPercent: Number(value),
+  studioId: type === "Studio Specific" ? String(studio?._id) : null,
+  startDate: new Date(startDate),
+  expiryDate: new Date(endDate),
+  isActive: true,
+};
 
     try {
       await API.post("/api/coupons", couponData);
@@ -317,16 +317,16 @@ function Coupons() {
           <tbody>
             {coupons.map((coupon) => (
               <tr key={coupon._id}>
-                <td>{coupon.CouponCode}</td>
-                <td>{coupon.CouponType === "StudioSpecific" ? "Studio Specific" : "Platform Wide"}</td>
-                <td>{coupon.DiscountPercent}%</td>
+                <td>{coupon.couponCode}</td>
+                <td>{coupon.couponType === "StudioSpecific" ? "Studio Specific" : "Platform Wide"}</td>
+                <td>{coupon.discountPercent}%</td>
                 <td>
                   {coupon.StudioID
-                    ? studios.find(s => s._id === coupon.StudioID)?.studioName || "N/A"
+                    ? studios.find(s => s._id === coupon.studioId)?.studioName || "N/A"
                     : "All"}
                 </td>
-                <td>{new Date(coupon.StartDate).toLocaleDateString()}</td>
-                <td>{new Date(coupon.ExpiryDate).toLocaleDateString()}</td>
+                <td>{new Date(coupon.startDate).toLocaleDateString()}</td>
+                <td>{new Date(coupon.expiryDate).toLocaleDateString()}</td>
                 <td>
                   <span className={`status ${coupon.isActive ? "active" : "disabled"}`}>
                     {coupon.isActive ? "Active" : "Disabled"}
