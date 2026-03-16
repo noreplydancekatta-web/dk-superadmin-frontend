@@ -82,67 +82,72 @@ function Coupons() {
   };
 
   const handleGenerate = async (e) => {
-    e.preventDefault();
-    const { code, type, value, studioEmail, startDate, endDate } = newCoupon;
-    const today = new Date().setHours(0, 0, 0, 0);
-    const start = new Date(startDate).setHours(0, 0, 0, 0);
-    const end = new Date(endDate).setHours(0, 0, 0, 0);
+  e.preventDefault();
 
-    if (type === "Studio Specific" && !studio) {
-      alert("Studio not found for the entered email");
-      return;
-    }
+  const { code, type, value, studioEmail, startDate, endDate } = newCoupon;
 
-    if (
-      !code ||
-      !value ||
-      !startDate ||
-      !endDate ||
-      (type === "Studio Specific" && !studioEmail)
-    ) {
-      alert("Please fill all required fields.");
-      return;
-    }
+  const studio = studios.find(s => s.contactEmail === studioEmail);
 
-    if (start < today || end < today) {
-      alert("Start and End dates must be today or in the future.");
-      return;
-    }
+  const today = new Date().setHours(0, 0, 0, 0);
+  const start = new Date(startDate).setHours(0, 0, 0, 0);
+  const end = new Date(endDate).setHours(0, 0, 0, 0);
 
-    if (end < start) {
-      alert("End Date must be after Start Date.");
-      return;
-    }
+  if (type === "Studio Specific" && !studio) {
+    alert("Studio not found for the entered email");
+    return;
+  }
 
-    const studio = studios.find(s => s.contactEmail === studioEmail);
-    const couponData = {
-      couponCode: code,
-      couponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
-      discountPercent: value,
-      studioID: type === "Studio Specific" ? studio?._id : null,
-      startDate: startDate,
-      expiryDate: endDate,
-      isActive: true,
-    };
+  if (
+    !code ||
+    !value ||
+    !startDate ||
+    !endDate ||
+    (type === "Studio Specific" && !studioEmail)
+  ) {
+    alert("Please fill all required fields.");
+    return;
+  }
 
-    try {
-      await API.post("/api/coupons", couponData);
-      alert("Coupon Generated Successfully!");
-      fetchCoupons();
-      setNewCoupon({
-        code: "",
-        type: "Studio Specific",
-        studioEmail: "",
-        studioName: "",
-        value: "",
-        startDate: "",
-        endDate: "",
-      });
-    } catch (err) {
-      console.error("Error generating coupon:", err);
-      alert("Failed to generate coupon");
-    }
+  if (start < today || end < today) {
+    alert("Start and End dates must be today or in the future.");
+    return;
+  }
+
+  if (end < start) {
+    alert("End Date must be after Start Date.");
+    return;
+  }
+
+  const couponData = {
+    couponCode: code,
+    couponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
+    discountPercent: value,
+    studioID: type === "Studio Specific" ? studio._id : null,
+    startDate: startDate,
+    expiryDate: endDate,
+    isActive: true,
   };
+
+  try {
+    await API.post("/api/coupons", couponData);
+    alert("Coupon Generated Successfully!");
+    fetchCoupons();
+
+    setNewCoupon({
+      code: "",
+      type: "Studio Specific",
+      studioEmail: "",
+      studioName: "",
+      value: "",
+      startDate: "",
+      endDate: "",
+    });
+
+  } catch (err) {
+    console.error("Error generating coupon:", err);
+    alert("Failed to generate coupon");
+  }
+};
 
   const handleDisableCoupon = async (id) => {
     try {
