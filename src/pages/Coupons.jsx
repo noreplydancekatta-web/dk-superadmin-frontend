@@ -49,17 +49,17 @@ function Coupons() {
   };
 
   const fetchPlatformFee = async () => {
-    try {
-      const res = await API.get("/api/platformfee");
-      setPlatformFee(res.data.feePercent);
-      setNewFee(res.data.feePercent);
-      setGst(res.data.gstPercent);
-      setNewGst(res.data.gstPercent);
-      setLastUpdated(new Date(res.data.updatedAt).toLocaleString());
-    } catch (err) {
-      console.error("Error fetching platform fee:", err);
-    }
-  };
+  try {
+    const res = await API.get("/api/platformfee");
+    setPlatformFee(res.data.feePercent);
+    setNewFee(res.data.feePercent);
+    setGst(res.data.gstPercent);
+    setNewGst(res.data.gstPercent);
+    setLastUpdated(new Date(res.data.updatedAt).toLocaleString());
+  } catch (err) {
+    console.error("Error fetching platform fee:", err);
+  }
+};
 
 
   const handleView = (coupon) => {
@@ -111,14 +111,14 @@ function Coupons() {
 
     const studio = studios.find(s => s.contactEmail === studioEmail);
     const couponData = {
-  couponCode: code.toUpperCase().trim(),
-  couponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
-  discountPercent: Number(value),
-  studioId: type === "Studio Specific" ? String(studio?._id) : null,
-  startDate: new Date(startDate),
-  expiryDate: new Date(endDate),
-  isActive: true,
-};
+      CouponCode: code,
+      CouponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
+      DiscountPercent: value,
+      StudioID: type === "Studio Specific" ? studio?._id : null,
+      StartDate: startDate,
+      ExpiryDate: endDate,
+      isActive: true,
+    };
 
     try {
       await API.post("/api/coupons", couponData);
@@ -134,7 +134,7 @@ function Coupons() {
         endDate: "",
       });
     } catch (err) {
-      console.error("Coupon Error:", err.response?.data);
+      console.error("Error generating coupon:", err);
       alert("Failed to generate coupon");
     }
   };
@@ -164,28 +164,28 @@ function Coupons() {
   };
 
   const handleGstChange = (e) => {
-    setNewGst(e.target.value);
-  };
+  setNewGst(e.target.value);
+};
 
   const handlePlatformFeeSubmit = async (e) => {
-    e.preventDefault();
-    const confirmUpdate = window.confirm("Do you want to update Platform Fee & GST?");
-    if (!confirmUpdate) return;
+  e.preventDefault();
+  const confirmUpdate = window.confirm("Do you want to update Platform Fee & GST?");
+  if (!confirmUpdate) return;
 
-    try {
-      const res = await API.put("/api/platformfee", {
-        feePercent: parseFloat(newFee),
-        gstPercent: parseFloat(newGst),
-      });
-      setPlatformFee(res.data.feePercent);
-      setGst(res.data.gstPercent);
-      setLastUpdated(new Date(res.data.updatedAt).toLocaleString());
-      alert("Platform Fee & GST Updated Successfully");
-    } catch (err) {
-      console.error("Error updating platform fee:", err);
-      alert("Failed to update platform fee");
-    }
-  };
+  try {
+    const res = await API.put("/api/platformfee", { 
+      feePercent: parseFloat(newFee),
+      gstPercent: parseFloat(newGst),
+    });
+    setPlatformFee(res.data.feePercent);
+    setGst(res.data.gstPercent);
+    setLastUpdated(new Date(res.data.updatedAt).toLocaleString());
+    alert("Platform Fee & GST Updated Successfully");
+  } catch (err) {
+    console.error("Error updating platform fee:", err);
+    alert("Failed to update platform fee");
+  }
+};
 
 
   const today = new Date().toISOString().split("T")[0];
@@ -197,29 +197,29 @@ function Coupons() {
       <form className="platform-fee-box" onSubmit={handlePlatformFeeSubmit}>
         <h3>Platform Fee (%)</h3>
         <div className="fee-inputs">
-          <input
-            type="number"
-            value={newFee}
-            onChange={handlePlatformFeeChange}
-            min="0"
-            max="100"
-            required
-          />
-          <span>%</span>
-        </div>
+    <input
+      type="number"
+      value={newFee}
+      onChange={handlePlatformFeeChange}
+      min="0"
+      max="100"
+      required
+    />
+    <span>%</span>
+  </div>
 
-        <h3>GST (%)</h3>
-        <div className="fee-inputs">
-          <input
-            type="number"
-            value={newGst}
-            onChange={handleGstChange}
-            min="0"
-            max="100"
-            required
-          />
-          <span>%</span>
-        </div>
+    <h3>GST (%)</h3>
+  <div className="fee-inputs">
+    <input
+      type="number"
+      value={newGst}
+      onChange={handleGstChange}
+      min="0"
+      max="100"
+      required
+    />
+    <span>%</span>
+  </div>
         <button type="submit" className="update-fee-btn">Update Fee</button>
         {lastUpdated && <p className="last-updated">Last Updated: {lastUpdated}</p>}
       </form>
@@ -317,16 +317,16 @@ function Coupons() {
           <tbody>
             {coupons.map((coupon) => (
               <tr key={coupon._id}>
-                <td>{coupon.couponCode}</td>
-                <td>{coupon.couponType === "StudioSpecific" ? "Studio Specific" : "Platform Wide"}</td>
-                <td>{coupon.discountPercent}%</td>
+                <td>{coupon.CouponCode}</td>
+                <td>{coupon.CouponType === "StudioSpecific" ? "Studio Specific" : "Platform Wide"}</td>
+                <td>{coupon.DiscountPercent}%</td>
                 <td>
                   {coupon.StudioID
-                    ? studios.find(s => s._id === coupon.studioId)?.studioName || "N/A"
+                    ? studios.find(s => s._id === coupon.StudioID)?.studioName || "N/A"
                     : "All"}
                 </td>
-                <td>{new Date(coupon.startDate).toLocaleDateString()}</td>
-                <td>{new Date(coupon.expiryDate).toLocaleDateString()}</td>
+                <td>{new Date(coupon.StartDate).toLocaleDateString()}</td>
+                <td>{new Date(coupon.ExpiryDate).toLocaleDateString()}</td>
                 <td>
                   <span className={`status ${coupon.isActive ? "active" : "disabled"}`}>
                     {coupon.isActive ? "Active" : "Disabled"}
