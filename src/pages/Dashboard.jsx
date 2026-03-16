@@ -134,7 +134,10 @@ function Dashboard() {
                 ? "0%"
                 :
                 `${Math.round(
-                  (transactions.filter(t => t.couponCode).length / transactions.length) * 100
+                  (
+                    transactions.filter(t => t.status === "Success" && (t.couponCode || t.paymentDetails?.couponCode)).length /
+                    transactions.filter(t => t.status === "Success").length
+                  ) * 100
                 )}%`
             }
           </h3>
