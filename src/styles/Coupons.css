@@ -206,3 +206,7 @@
 .view-btn:hover {
   background-color: #1c5bfc;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
