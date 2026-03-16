@@ -82,3 +82,9 @@
   background-color: #1c5bfc;
   transform: translateY(-2px);
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0); /* ensures icon stays dark */
+  opacity: 1;
+  cursor: pointer;
+}
