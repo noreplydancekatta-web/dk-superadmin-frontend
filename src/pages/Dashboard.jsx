@@ -59,7 +59,6 @@ function Dashboard() {
 
       <div className="revenue-header">
         <h2>Revenue Trends</h2>
-        <button className="manage-users-btn">Manage Users</button>
       </div>
 
       <div className="revenue-section">
