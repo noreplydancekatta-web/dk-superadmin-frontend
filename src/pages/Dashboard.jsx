@@ -1,60 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import API from '../axios';
 import '../styles/Dashboard.css';
 import RevenueChart from '../components/RevenueChart.jsx';
 
 function Dashboard() {
+
   const [isUserTotal, setIsUserTotal] = useState(true);
   const [isStudioTotal, setIsStudioTotal] = useState(true);
 
-  const totalUsers = 1234;
-  const activeUsers = 456;
+  const [users, setUsers] = useState([]);
+  const [studios, setStudios] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
-  const totalStudios = 56;
-  const activeStudios = 20;
+  useEffect(() => {
+    fetchUsers();
+    fetchStudios();
+    fetchTransactions();
+  }, []);
 
-  const handleUserToggle = () => {
-    setIsUserTotal(!isUserTotal);
+  // USERS
+  const fetchUsers = async () => {
+    try {
+      const res = await API.get('/api/users');
+      setUsers(res.data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
   };
 
-  const handleStudioToggle = () => {
-    setIsStudioTotal(!isStudioTotal);
+  // STUDIOS
+  const fetchStudios = async () => {
+    try {
+      const res = await API.get('/api/studios');
+      setStudios(res.data);
+    } catch (err) {
+      console.error("Error fetching studios:", err);
+    }
   };
+
+  // TRANSACTIONS
+  const fetchTransactions = async () => {
+    try {
+      const res = await API.get('/api/transactions');
+      setTransactions(res.data);
+    } catch (err) {
+      console.error("Error fetching transactions:", err);
+    }
+  };
+
+  // METRICS
+  const totalUsers = users.length;
+  const activeUsers = users.filter(u => u.status === "Active").length;
+
+  const totalStudios = studios.length;
+  const activeStudios = studios.filter(s => s.status === "Approved").length;
+
+  const revenue = transactions
+    .filter(t => t.paymentDetails?.paymentStatus === "Success")
+    .reduce((sum, t) => sum + (t.paymentDetails?.amountPaid || 0), 0);
 
   return (
     <div className="dashboard">
       <h2 className="dashboard-title">Dashboard</h2>
 
       <div className="cards">
-        {/* User Card Toggle */}
-        <div className="card toggle-card" onClick={handleUserToggle}>
+
+        {/* Users Card */}
+        <div className="card toggle-card" onClick={() => setIsUserTotal(!isUserTotal)}>
           <div className="toggle-card-header">
             <div className={`toggle-background ${isUserTotal ? 'left' : 'right'}`}></div>
-            <span className={`toggle-label ${isUserTotal ? 'active' : ''}`}>Total Users</span>
-            <span className={`toggle-label ${!isUserTotal ? 'active' : ''}`}>Active Users</span>
+
+            <span className={`toggle-label ${isUserTotal ? 'active' : ''}`}>
+              Total Users
+            </span>
+
+            <span className={`toggle-label ${!isUserTotal ? 'active' : ''}`}>
+              Active Users
+            </span>
+
           </div>
+
           <h3>{isUserTotal ? totalUsers : activeUsers}</h3>
         </div>
 
-        {/* Studio Card Toggle */}
-        <div className="card toggle-card" onClick={handleStudioToggle}>
+
+        {/* Studios Card */}
+        <div className="card toggle-card" onClick={() => setIsStudioTotal(!isStudioTotal)}>
           <div className="toggle-card-header">
+
             <div className={`toggle-background ${isStudioTotal ? 'left' : 'right'}`}></div>
-            <span className={`toggle-label ${isStudioTotal ? 'active' : ''}`}>Total Studios</span>
-            <span className={`toggle-label ${!isStudioTotal ? 'active' : ''}`}>Active Studios</span>
+
+            <span className={`toggle-label ${isStudioTotal ? 'active' : ''}`}>
+              Total Studios
+            </span>
+
+            <span className={`toggle-label ${!isStudioTotal ? 'active' : ''}`}>
+              Active Studios
+            </span>
+
           </div>
+
           <h3>{isStudioTotal ? totalStudios : activeStudios}</h3>
         </div>
 
-        {/* Other Static Cards */}
+
+        {/* Coupon Usage */}
         <div className="card">
           <p>Coupon Usage</p>
-          <h3>23%</h3>
+          <h3>
+            {
+              transactions.length === 0
+              ? "0%"
+              :
+              `${Math.round(
+                (transactions.filter(t => t.couponCode).length / transactions.length) * 100
+              )}%`
+            }
+          </h3>
         </div>
 
+
+        {/* Revenue */}
         <div className="card">
           <p>Revenue</p>
-          <h3>₹12,345</h3>
+          <h3>₹{revenue.toLocaleString()}</h3>
         </div>
+
       </div>
 
       <div className="revenue-header">
@@ -62,8 +133,9 @@ function Dashboard() {
       </div>
 
       <div className="revenue-section">
-        <RevenueChart />
+        <RevenueChart transactions={transactions}/>
       </div>
+
     </div>
   );
 }
