@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import '../styles/CouponModal.css';
 
 function CouponModal({ isOpen, onClose, coupon, onDisable, onUpdateValue }) {
-  const [newValue, setNewValue] = useState(coupon?.DiscountPercent || 0);
+  const [newValue, setNewValue] = useState(coupon?.discountPercent || 0);
 
   useEffect(() => {
-    setNewValue(coupon?.DiscountPercent || 0);
+    setNewValue(coupon?.discountPercent || 0);
   }, [coupon]);
 
   if (!isOpen || !coupon) return null;
@@ -29,12 +29,12 @@ function CouponModal({ isOpen, onClose, coupon, onDisable, onUpdateValue }) {
         <h3>Coupon Details</h3>
 
         <div className="modal-section">
-          <p><strong>Code:</strong> {coupon.CouponCode}</p>
-          <p><strong>Type:</strong> {coupon.CouponType === 'StudioSpecific' ? 'Studio Specific' : 'Platform Wide'}</p>
-          <p><strong>Studio ID:</strong> {coupon.StudioID || 'All Studios'}</p>
-          <p><strong>Current Value:</strong> {coupon.DiscountPercent}%</p>
-          <p><strong>Start Date:</strong> {new Date(coupon.StartDate).toLocaleDateString()}</p>
-          <p><strong>End Date:</strong> {new Date(coupon.ExpiryDate).toLocaleDateString()}</p>
+          <p><strong>Code:</strong> {coupon.couponCode}</p>
+          <p><strong>Type:</strong> {coupon.couponType === 'StudioSpecific' ? 'Studio Specific' : 'Platform Wide'}</p>
+          <p><strong>Studio ID:</strong> {coupon.studioID || 'All Studios'}</p>
+          <p><strong>Current Value:</strong> {coupon.discountPercent}%</p>
+          <p><strong>Start Date:</strong> {new Date(coupon.startDate).toLocaleDateString()}</p>
+          <p><strong>End Date:</strong> {new Date(coupon.expiryDate).toLocaleDateString()}</p>
           <p><strong>Status:</strong> 
             <span className={`status-text ${coupon.isActive ? 'active' : 'disabled'}`}>
               {coupon.isActive ? 'Active' : 'Disabled'}
