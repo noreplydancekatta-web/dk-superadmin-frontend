@@ -1,14 +1,4 @@
-.studio-report-page {
-  color-scheme: light; /* forces browser to treat this as light UI */
-}
-:root {
-  --text-primary: #111827;   /* strong text */
-  --text-secondary: #6b7280; /* muted text */
-  --border: #e5e7eb;
-  --bg-card: #ffffff;
-  --accent: #3e74fb;
-}
-
+/* PAGE */
 .studio-report-page {
   padding: 32px 40px;
   background: #f9fafb;
@@ -16,36 +6,116 @@
   color-scheme: light;
 }
 
+/* WRAPPER */
+.studio-report-wrapper {
+  max-width: 640px;
+}
+
 /* HEADER */
 .studio-report-header h2 {
+  font-size: 22px;
+  font-weight: 600;
   color: #111827;
+  margin-bottom: 4px;
 }
 
 .studio-report-header p {
+  font-size: 14px;
   color: #6b7280;
+  margin-bottom: 20px;
 }
 
 /* PANEL */
 .studio-report-panel {
   background: #ffffff;
   border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+/* GRID */
+.studio-report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* FIELD */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field.full {
+  grid-column: span 2;
 }
 
 /* LABEL */
 .field label {
+  font-size: 13px;
+  font-weight: 500;
   color: #6b7280;
 }
 
 /* INPUT */
 .field input,
 .field select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
   background: #ffffff;
   color: #111827;
-  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+/* HOVER */
+.field input:hover,
+.field select:hover {
+  border-color: #cbd5e1;
+}
+
+/* FOCUS */
+.field input:focus,
+.field select:focus {
+  border-color: #3e74fb;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(62, 116, 251, 0.15);
+}
+
+/* FOOTER */
+.studio-report-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
 }
 
 /* BUTTON */
-.actions button {
+.studio-report-footer button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
   background: #3e74fb;
   color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* BUTTON HOVER */
+.studio-report-footer button:hover {
+  background: #1c5bfc;
+  transform: translateY(-1px);
+}
+
+/* BUTTON ACTIVE */
+.studio-report-footer button:active {
+  transform: scale(0.97);
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }

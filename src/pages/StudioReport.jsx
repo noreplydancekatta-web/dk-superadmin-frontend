@@ -62,62 +62,66 @@ function StudioReport() {
 
   return (
     <div className="studio-report-page">
-  <div className="studio-report-wrapper">
+      <div className="studio-report-wrapper">
 
-    <div className="studio-report-header">
-      <h2>Studio Report</h2>
-      <p>Export registrations for a selected studio and date range</p>
-    </div>
-
-    <div className="studio-report-panel">
-
-      <div className="studio-report-row">
-        <div className="field">
-          <label>Start Date</label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            max={today}
-          />
+        <div className="studio-report-header">
+          <h2>Studio Report</h2>
+          <p>Export registrations for a selected studio and date range</p>
         </div>
 
-        <div className="field">
-          <label>End Date</label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            min={startDate}
-            max={today}
-          />
+        <div className="studio-report-panel">
+
+          {/* FORM */}
+          <div className="studio-report-grid">
+
+            <div className="field">
+              <label>Start Date</label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                max={today}
+              />
+            </div>
+
+            <div className="field">
+              <label>End Date</label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                min={startDate}
+                max={today}
+              />
+            </div>
+
+            <div className="field full">
+              <label>Studio</label>
+              <select
+                value={selectedStudio}
+                onChange={(e) => setSelectedStudio(e.target.value)}
+              >
+                <option value="">Select a studio</option>
+                {studioList.map((studio) => (
+                  <option key={studio._id} value={studio._id}>
+                    {studio.studioName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+          </div>
+
+          {/* ACTION */}
+          <div className="studio-report-footer">
+            <button onClick={handleDownload}>
+              Download CSV
+            </button>
+          </div>
+
         </div>
       </div>
-
-      <div className="field full">
-        <label>Studio</label>
-        <select
-          value={selectedStudio}
-          onChange={(e) => setSelectedStudio(e.target.value)}
-        >
-          <option value="">Select a studio</option>
-          {studioList.map((studio) => (
-            <option key={studio._id} value={studio._id}>
-              {studio.studioName}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="actions">
-        <button onClick={handleDownload}>
-          Download CSV
-        </button>
-      </div>
-
     </div>
-  </div>
-</div>
   );
 }
 
