@@ -173,12 +173,12 @@ function DataOperations() {
 
   // ✅ Fetch eligible owners when opening studio form
   useEffect(() => {
-    if (showStudioForm) {
+    if (activeForm === 'createStudio') {
       API.get("/api/users/eligible-owners")
         .then((res) => setStudioOwners(res.data))
         .catch((err) => console.error("Error fetching eligible owners:", err));
     }
-  }, [showStudioForm]);
+  }, [activeForm]);
 
   // ✅ Handle studio form submit
   const handleCreateStudio = async (e) => {
@@ -349,20 +349,20 @@ function DataOperations() {
   const [showDeleteBranchForm, setShowDeleteBranchForm] = useState(false);
 
   useEffect(() => {
-    if (showBranchForm) {
+    if (activeForm === "createBranch") {
       API.get("/api/studios")
         .then((res) => setStudios(res.data))
         .catch((err) => console.error("Error fetching studios:", err));
     }
-  }, [showBranchForm]);
+  }, [activeForm]);
 
   useEffect(() => {
-    if (showBranchForm || showUpdateBranchForm || showDeleteBranchForm) {
+    if (activeForm === "createBranch" || activeForm === "updateBranch" || activeForm === "deleteBranch") {
       API.get("/api/studios")
         .then((res) => setStudios(res.data))
         .catch((err) => console.error("Error fetching studios:", err));
     }
-  }, [showBranchForm, showUpdateBranchForm, showDeleteBranchForm]);
+  }, [activeForm]);
 
   const handleCreateBranch = async (e) => {
     e.preventDefault();
@@ -477,17 +477,17 @@ function DataOperations() {
 
   // ✅ Fetch Studios, DanceStyles, Levels when opening Batch Form
   useEffect(() => {
-    if (showBatchForm) {
+    if (activeForm === "createBatch" || activeForm === "updateBatch" || activeForm === "deleteBatch") {
       API.get("/api/studios").then((res) => setStudios(res.data));
       API.get("/api/demographics/dancestyles").then((res) =>
         setDanceStyles(res.data)
       );
       API.get("/api/demographics/levels").then((res) => setLevels(res.data)); // <-- fetch from backend
     }
-  }, [showBatchForm]);
+  }, [activeForm]);
 
   useEffect(() => {
-    if (showBatchForm || showUpdateBatchForm || showDeleteBatchForm) {
+    if (activeForm === "createBatch" || activeForm === "updateBatch" || activeForm === "deleteBatch") {
       API.get("/api/studios")
         .then((res) => setBatchStudios(res.data))
         .catch((err) => console.error("Error fetching studios:", err));
@@ -498,7 +498,7 @@ function DataOperations() {
 
       API.get("/api/demographics/levels").then((res) => setLevels(res.data));
     }
-  }, [showBatchForm, showUpdateBatchForm, showDeleteBatchForm]);
+  }, [activeForm]);
 
   useEffect(() => {
     if (newBatch.studioId) {
@@ -534,7 +534,7 @@ function DataOperations() {
   }, [newBatch.branch, allBatches]);
 
   useEffect(() => {
-    if (showBatchForm || showUpdateBatchForm || showDeleteBatchForm) {
+    if (activeForm === "createBatch" || activeForm === "updateBatch" || activeForm === "deleteBatch") {
       API.get("/api/batches")
         .then((res) => {
           console.log("Fetched batches:", res.data); // Debug
@@ -542,7 +542,7 @@ function DataOperations() {
         })
         .catch((err) => console.error("Error fetching batches:", err));
     }
-  }, [showBatchForm, showUpdateBatchForm, showDeleteBatchForm]);
+  }, [activeForm]);
 
   // ✅ Handle Batch Submit
   const handleCreateBatch = async (e) => {
