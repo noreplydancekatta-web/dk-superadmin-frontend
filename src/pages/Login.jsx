@@ -7,6 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   // ✅ Redirect to dashboard if already logged in
@@ -56,14 +57,32 @@ const Login = () => {
         </div>
 
         <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+  <label>Password</label>
+
+  <div style={{ position: "relative" }}>
+    <input
+      type={showPassword ? "text" : "password"}
+      placeholder="••••••••"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+
+    <span
+      onClick={() => setShowPassword(!showPassword)}
+      style={{
+        position: "absolute",
+        right: "12px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        cursor: "pointer",
+        fontSize: "16px",
+        userSelect: "none"
+      }}
+    >
+      {showPassword ? "🙈" : "👁️"}
+    </span>
+  </div>
+</div>
 
         <button className="primary-btn" onClick={handleLogin} disabled={loading}>
           {loading ? <span className="loader"></span> : 'Login'}
