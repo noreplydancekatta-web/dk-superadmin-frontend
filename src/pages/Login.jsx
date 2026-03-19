@@ -64,7 +64,7 @@ const Login = () => {
       type={showPassword ? "text" : "password"}
       placeholder="••••••••"
       value={password}
-      style={{ paddingRight: "40px" }} 
+      style={{ width: "370px" }} 
       onChange={(e) => setPassword(e.target.value)}
     />
 
