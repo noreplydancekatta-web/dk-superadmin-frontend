@@ -68,8 +68,7 @@ function Transactions() {
               <th>Status</th>
               <th>Mode</th>
               <th>Date</th>
-              <th>Razorpay Order ID</th>
-              <th>Razorpay Payment ID</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -105,8 +104,7 @@ function Transactions() {
                     ? new Date(tx.transactionDate).toISOString().split("T")[0]
                     : "N/A"}
                 </td>
-                <td>{tx.paymentDetails?.razorpayOrderId || "-"}</td>
-                <td>{tx.paymentDetails?.razorpayPaymentId || "-"}</td>
+               
               </tr>
             ))}
           </tbody>
