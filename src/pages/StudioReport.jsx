@@ -61,66 +61,63 @@ function StudioReport() {
 
 
   return (
-    <div className="studio-report-container">
-      <div className="studio-report-card">
+    <div className="studio-report-page">
+  <div className="studio-report-wrapper">
 
-        {/* HEADER */}
-        <div className="studio-report-header">
-          <div className="report-icon">📊</div>
-          <div>
-            <h2>Studio Report</h2>
-            <p>Download registrations across branches & batches</p>
-          </div>
-        </div>
-
-        {/* FORM */}
-        <div className="studio-report-grid">
-
-          <div className="studio-report-field">
-            <label>Start Date *</label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              max={today}
-            />
-          </div>
-
-          <div className="studio-report-field">
-            <label>End Date *</label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              min={startDate}
-              max={today}
-            />
-          </div>
-
-          <div className="studio-report-field full-width">
-            <label>Select Studio *</label>
-            <select
-              value={selectedStudio}
-              onChange={(e) => setSelectedStudio(e.target.value)}
-            >
-              <option value="">-- Select Studio --</option>
-              {studioList.map((studio) => (
-                <option key={studio._id} value={studio._id}>
-                  {studio.studioName}
-                </option>
-              ))}
-            </select>
-          </div>
-
-        </div>
-
-        {/* BUTTON */}
-        <button className="studio-report-btn" onClick={handleDownload}>
-          ⬇ Download Report
-        </button>
-
-      </div>
+    <div className="studio-report-header">
+      <h2>Studio Report</h2>
+      <p>Export registrations for a selected studio and date range</p>
     </div>
+
+    <div className="studio-report-panel">
+
+      <div className="studio-report-row">
+        <div className="field">
+          <label>Start Date</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            max={today}
+          />
+        </div>
+
+        <div className="field">
+          <label>End Date</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            min={startDate}
+            max={today}
+          />
+        </div>
+      </div>
+
+      <div className="field full">
+        <label>Studio</label>
+        <select
+          value={selectedStudio}
+          onChange={(e) => setSelectedStudio(e.target.value)}
+        >
+          <option value="">Select a studio</option>
+          {studioList.map((studio) => (
+            <option key={studio._id} value={studio._id}>
+              {studio.studioName}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="actions">
+        <button onClick={handleDownload}>
+          Download CSV
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
   );
 }
 
