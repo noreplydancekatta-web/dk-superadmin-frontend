@@ -2525,15 +2525,12 @@ function DataOperations() {
           endpoint="demographics/city"
           onDownload={handleDownload}
         />
-        <div className="data-operations-card">
-          <h3>Coupons</h3>
-          <button
-            className="data-operations-btn download"
-            onClick={() => handleDownload("coupons", "coupons")}
-          >
-            <FiDownloadCloud className="icon" /> Download CSV
-          </button>
-        </div>
+        <DataCard
+          title="Coupons"
+          type="coupon"
+          endpoint="coupons"
+          onDownload={handleDownload}
+        />
       </div>
     </div>
   );
