@@ -207,8 +207,12 @@
   background-color: #1c5bfc;
 }
 
+/* Fix calendar icon visibility */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0) brightness(0); /* makes it black */
+  filter: invert(0); /* ensures icon stays dark */
   opacity: 1;
   cursor: pointer;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
