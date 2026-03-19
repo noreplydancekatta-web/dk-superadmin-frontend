@@ -209,10 +209,10 @@
 
 /* Fix calendar icon visibility */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0); /* ensures icon stays dark */
+  filter: invert(0) !important; /* ensures icon stays dark */
   opacity: 1;
   cursor: pointer;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+  filter: invert(1) !important;
 }
