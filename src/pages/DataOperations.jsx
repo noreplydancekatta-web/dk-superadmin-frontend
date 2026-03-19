@@ -643,106 +643,102 @@ function DataOperations() {
 
       {/* Top Actions */}
       <div className="top-actions">
-        <div className="action-card">
-          <h3>Users</h3>
-          <div className="action-btn-container">
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "createUser" ? null : "createUser")}
-            >
-              <FiPlus /> Create User
-            </button>
 
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "updateUser" ? null : "updateUser")}
-            >
-              <FiEdit /> Update User
-            </button>
+  {/* USERS */}
+  <div className="action-card modern">
+    <div className="card-header">
+      <div className="card-icon users">👤</div>
+      <h3>Users</h3>
+    </div>
 
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "deleteUser" ? null : "deleteUser")}
-            >
-              <FiTrash /> Delete User
-            </button>
-          </div>
-        </div>
-
-        <div className="action-card">
-          <h3>Studios</h3>
-          <div className="action-btn-container">
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "createStudio" ? null : "createStudio")}
-            >
-              <FiPlus /> Create Studio
-            </button>
-
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "updateStudio" ? null : "updateStudio")}
-            >
-              <FiEdit /> Update Studio
-            </button>
-
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "deleteStudio" ? null : "deleteStudio")}
-            >
-              <FiTrash /> Delete Studio
-            </button>
-          </div>
-        </div>
-        <div className="action-card">
-          <h3>Branches</h3>
-          <div className="action-btn-container">
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "createBranch" ? null : "createBranch")}
-            >
-              <FiPlus /> Create Branch
-            </button>
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "updateBranch" ? null : "updateBranch")}
-            >
-              <FiEdit /> Update Branch
-            </button>
-
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "deleteBranch" ? null : "deleteBranch")}
-            >
-              <FiTrash /> Delete Branch
-            </button>
-          </div>
-        </div>
-        <div className="action-card">
-          <h3>Batches</h3>
-          <div className="action-btn-container">
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "createBatch" ? null : "createBatch")}
-            >
-              <FiPlus /> Create Batch
-            </button>
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "updateBatch" ? null : "updateBatch")}
-            >
-              <FiEdit /> Update Batch
-            </button>
-
-            <button
-              className="action-btn"
-              onClick={() => setActiveForm(activeForm === "deleteBatch" ? null : "deleteBatch")}
-            >
-              <FiTrash /> Delete Batch
-            </button>
-          </div>
-        </div>
+    <div className="action-grid">
+      <div
+        className="action-tile create"
+        onClick={() => setActiveForm(activeForm === "createUser" ? null : "createUser")}
+      >
+        <FiPlus />
+        <span>Create</span>
       </div>
+
+      <div
+        className="action-tile update"
+        onClick={() => setActiveForm(activeForm === "updateUser" ? null : "updateUser")}
+      >
+        <FiEdit />
+        <span>Update</span>
+      </div>
+
+      <div
+        className="action-tile delete"
+        onClick={() => setActiveForm(activeForm === "deleteUser" ? null : "deleteUser")}
+      >
+        <FiTrash />
+        <span>Delete</span>
+      </div>
+    </div>
+  </div>
+
+  {/* STUDIOS */}
+  <div className="action-card modern">
+    <div className="card-header">
+      <div className="card-icon studios">🏢</div>
+      <h3>Studios</h3>
+    </div>
+
+    <div className="action-grid">
+      <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createStudio" ? null : "createStudio")}>
+        <FiPlus /><span>Create</span>
+      </div>
+      <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateStudio" ? null : "updateStudio")}>
+        <FiEdit /><span>Update</span>
+      </div>
+      <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteStudio" ? null : "deleteStudio")}>
+        <FiTrash /><span>Delete</span>
+      </div>
+    </div>
+  </div>
+
+  {/* BRANCHES */}
+  <div className="action-card modern">
+    <div className="card-header">
+      <div className="card-icon branches">📍</div>
+      <h3>Branches</h3>
+    </div>
+
+    <div className="action-grid">
+      <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createBranch" ? null : "createBranch")}>
+        <FiPlus /><span>Create</span>
+      </div>
+      <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateBranch" ? null : "updateBranch")}>
+        <FiEdit /><span>Update</span>
+      </div>
+      <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteBranch" ? null : "deleteBranch")}>
+        <FiTrash /><span>Delete</span>
+      </div>
+    </div>
+  </div>
+
+  {/* BATCHES */}
+  <div className="action-card modern">
+    <div className="card-header">
+      <div className="card-icon batches">🕺</div>
+      <h3>Batches</h3>
+    </div>
+
+    <div className="action-grid">
+      <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createBatch" ? null : "createBatch")}>
+        <FiPlus /><span>Create</span>
+      </div>
+      <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateBatch" ? null : "updateBatch")}>
+        <FiEdit /><span>Update</span>
+      </div>
+      <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteBatch" ? null : "deleteBatch")}>
+        <FiTrash /><span>Delete</span>
+      </div>
+    </div>
+  </div>
+
+</div>
 
       {/* User Form */}
       {activeForm === "createUser" &&  (
