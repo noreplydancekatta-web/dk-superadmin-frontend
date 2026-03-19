@@ -12,6 +12,7 @@ import "../styles/DataOperations.css";
 function DataOperations() {
   const [showUserForm, setShowUserForm] = useState(false);
   const [showStudioForm, setShowStudioForm] = useState(false);
+  const [activeForm, setActiveForm] = useState(null);
 
   // ================= User State =================
   const [newUser, setNewUser] = useState({
@@ -647,21 +648,21 @@ function DataOperations() {
           <div className="action-btn-container">
             <button
               className="action-btn"
-              onClick={() => setShowUserForm(!showUserForm)}
+              onClick={() => setActiveForm(activeForm === "createUser" ? null : "createUser")}
             >
               <FiPlus /> Create User
             </button>
 
             <button
               className="action-btn"
-              onClick={() => setShowUpdateUserForm(!showUpdateUserForm)}
+              onClick={() => setActiveForm(activeForm === "updateUser" ? null : "updateUser")}
             >
               <FiEdit /> Update User
             </button>
 
             <button
               className="action-btn"
-              onClick={() => setShowDeleteUserForm(!showDeleteUserForm)}
+              onClick={() => setActiveForm(activeForm === "deleteUser" ? null : "deleteUser")}
             >
               <FiTrash /> Delete User
             </button>
@@ -673,21 +674,21 @@ function DataOperations() {
           <div className="action-btn-container">
             <button
               className="action-btn"
-              onClick={() => setShowStudioForm(!showStudioForm)}
+              onClick={() => setActiveForm(activeForm === "createStudio" ? null : "createStudio")}
             >
               <FiPlus /> Create Studio
             </button>
 
             <button
               className="action-btn"
-              onClick={() => setShowUpdateStudioForm(!showUpdateStudioForm)}
+              onClick={() => setActiveForm(activeForm === "updateStudio" ? null : "updateStudio")}
             >
               <FiEdit /> Update Studio
             </button>
 
             <button
               className="action-btn"
-              onClick={() => setShowDeleteStudioForm(!showDeleteStudioForm)}
+              onClick={() => setActiveForm(activeForm === "deleteStudio" ? null : "deleteStudio")}
             >
               <FiTrash /> Delete Studio
             </button>
@@ -698,20 +699,20 @@ function DataOperations() {
           <div className="action-btn-container">
             <button
               className="action-btn"
-              onClick={() => setShowBranchForm(!showBranchForm)}
+              onClick={() => setActiveForm(activeForm === "createBranch" ? null : "createBranch")}
             >
               <FiPlus /> Create Branch
             </button>
             <button
               className="action-btn"
-              onClick={() => setShowUpdateBranchForm(!showUpdateBranchForm)}
+              onClick={() => setActiveForm(activeForm === "updateBranch" ? null : "updateBranch")}
             >
               <FiEdit /> Update Branch
             </button>
 
             <button
               className="action-btn"
-              onClick={() => setShowDeleteBranchForm(!showDeleteBranchForm)}
+              onClick={() => setActiveForm(activeForm === "deleteBranch" ? null : "deleteBranch")}
             >
               <FiTrash /> Delete Branch
             </button>
@@ -722,20 +723,20 @@ function DataOperations() {
           <div className="action-btn-container">
             <button
               className="action-btn"
-              onClick={() => setShowBatchForm(!showBatchForm)}
+              onClick={() => setActiveForm(activeForm === "createBatch" ? null : "createBatch")}
             >
               <FiPlus /> Create Batch
             </button>
             <button
               className="action-btn"
-              onClick={() => setShowUpdateBatchForm(!showUpdateBatchForm)}
+              onClick={() => setActiveForm(activeForm === "updateBatch" ? null : "updateBatch")}
             >
               <FiEdit /> Update Batch
             </button>
 
             <button
               className="action-btn"
-              onClick={() => setShowDeleteBatchForm(!showDeleteBatchForm)}
+              onClick={() => setActiveForm(activeForm === "deleteBatch" ? null : "deleteBatch")}
             >
               <FiTrash /> Delete Batch
             </button>
@@ -744,9 +745,11 @@ function DataOperations() {
       </div>
 
       {/* User Form */}
-      {showUserForm && (
+      {activeForm === "createUser" &&  (
         <form className="create-form" onSubmit={handleCreateUser}>
-          <h3>Create New User</h3>
+          <h3>Create New User
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             <label>
               First Name
@@ -969,9 +972,11 @@ function DataOperations() {
       )}
 
       {/* Studio Form */}
-      {showStudioForm && (
+      {activeForm === "createStudio" && (
         <form className="create-form" onSubmit={handleCreateStudio}>
-          <h3>Create New Studio</h3>
+          <h3>Create New Studio
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             <label>
               Select Owner
@@ -1208,9 +1213,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showBranchForm && (
+      {activeForm === "createBranch" && (
         <form className="create-form" onSubmit={handleCreateBranch}>
-          <h3>Create New Branch</h3>
+          <h3>Create New Branch
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             <label>
               Select Studio
@@ -1343,9 +1350,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showBatchForm && (
+      {activeForm === "createBatch" && (
         <form className="create-form" onSubmit={handleCreateBatch}>
-          <h3>Create New Batch</h3>
+          <h3>Create New Batch
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             <label>
               Select Studio
@@ -1540,9 +1549,11 @@ function DataOperations() {
 
       {/* USERS */}
 
-      {showUpdateUserForm && (
+      {activeForm === "updateUser" && (
         <form className="create-form" onSubmit={handleUpdateUser}>
-          <h3>Update User</h3>
+          <h3>Update User
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
 
           {/* Step 1: Enter Email to fetch user */}
           <label>
@@ -1760,9 +1771,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showDeleteUserForm && (
+      {activeForm === "deleteUser" && (
         <div className="create-form">
-          <h3>Delete User</h3>
+          <h3>Delete User
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <label>
             Enter Email to Delete User
             <input
@@ -1778,9 +1791,11 @@ function DataOperations() {
         </div>
       )}
 
-      {showUpdateStudioForm && (
+      {activeForm === "updateStudio" && (
         <form className="create-form" onSubmit={handleUpdateStudio}>
-          <h3>Update Studio</h3>
+          <h3>Update Studio
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             <select
               value={selectedStudioId}
@@ -1954,9 +1969,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showDeleteStudioForm && (
+      {activeForm === "deleteStudio" && (
         <form className="create-form" onSubmit={handleDeleteStudio}>
-          <h3>Delete Studio</h3>
+          <h3>Delete Studio
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
 
           <select
             value={selectedStudioId}
@@ -1977,9 +1994,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showUpdateBranchForm && (
+      {activeForm === "updateBranch" && (
         <form className="create-form" onSubmit={handleUpdateBranch}>
-          <h3>Update Branch</h3>
+          <h3>Update Branch
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             {/* Select Studio */}
             <label>
@@ -2147,9 +2166,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showDeleteBranchForm && (
+      {activeForm === "deleteBranch" && (
         <form className="create-form" onSubmit={handleDeleteBranch}>
-          <h3>Delete Branch</h3>
+          <h3>Delete Branch
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
 
           {/* Select Studio */}
           <label>
@@ -2195,9 +2216,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showUpdateBatchForm && (
+      {activeForm === "updateBatch" && (
         <form className="create-form" onSubmit={handleUpdateBatch}>
-          <h3>Update Batch</h3>
+          <h3>Update Batch
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
           <div className="form-grid">
             {/* Select Studio */}
             <label>
@@ -2400,9 +2423,11 @@ function DataOperations() {
         </form>
       )}
 
-      {showDeleteBatchForm && (
+      {activeForm === "deleteBatch" && (
         <form className="create-form" onSubmit={handleDeleteBatch}>
-          <h3>Delete Batch</h3>
+          <h3>Delete Batch
+            <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
+          </h3>
 
           <label>
             Select Studio
