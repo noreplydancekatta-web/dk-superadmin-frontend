@@ -72,44 +72,19 @@
 .data-operations-btn .icon {
   font-size: 16px;
 }
-.top-actions {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.action-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 480px;
-  padding: 16px;
-  border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  transition: all 0.25s ease;
-}
+
 
 .action-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
-.action-card h3{
-  margin: 10px;
-  color: #333
-}
+
 .action-btn-container{
   gap: 10px;
   display: flex;
   flex-direction: row;
 }
-.action-btn {
-  background: linear-gradient(135deg, #3e74fb, #1c5bfc);
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-weight: 500;
-}
+
 
 .action-btn:hover {
   background: linear-gradient(135deg, #2f63f5, #1747d1);
