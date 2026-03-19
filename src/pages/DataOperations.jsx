@@ -5,6 +5,12 @@ import {
   FiUploadCloud,
   FiEdit,
   FiTrash,
+  FiUsers,
+  FiHome,
+  FiMapPin,
+  FiGlobe,
+  FiMap,
+  FiTag
 } from "react-icons/fi";
 import API from "../axios";
 import "../styles/DataOperations.css";
@@ -644,104 +650,104 @@ function DataOperations() {
       {/* Top Actions */}
       <div className="top-actions">
 
-  {/* USERS */}
-  <div className="action-card modern">
-    <div className="card-header">
-      <div className="card-icon users">👤</div>
-      <h3>Users</h3>
-    </div>
+        {/* USERS */}
+        <div className="action-card modern">
+          <div className="card-header">
+            <div className="card-icon users">👤</div>
+            <h3>Users</h3>
+          </div>
 
-    <div className="action-grid">
-      <div
-        className="action-tile create"
-        onClick={() => setActiveForm(activeForm === "createUser" ? null : "createUser")}
-      >
-        <FiPlus />
-        <span>Create</span>
-      </div>
+          <div className="action-grid">
+            <div
+              className="action-tile create"
+              onClick={() => setActiveForm(activeForm === "createUser" ? null : "createUser")}
+            >
+              <FiPlus />
+              <span>Create</span>
+            </div>
 
-      <div
-        className="action-tile update"
-        onClick={() => setActiveForm(activeForm === "updateUser" ? null : "updateUser")}
-      >
-        <FiEdit />
-        <span>Update</span>
-      </div>
+            <div
+              className="action-tile update"
+              onClick={() => setActiveForm(activeForm === "updateUser" ? null : "updateUser")}
+            >
+              <FiEdit />
+              <span>Update</span>
+            </div>
 
-      <div
-        className="action-tile delete"
-        onClick={() => setActiveForm(activeForm === "deleteUser" ? null : "deleteUser")}
-      >
-        <FiTrash />
-        <span>Delete</span>
-      </div>
-    </div>
-  </div>
+            <div
+              className="action-tile delete"
+              onClick={() => setActiveForm(activeForm === "deleteUser" ? null : "deleteUser")}
+            >
+              <FiTrash />
+              <span>Delete</span>
+            </div>
+          </div>
+        </div>
 
-  {/* STUDIOS */}
-  <div className="action-card modern">
-    <div className="card-header">
-      <div className="card-icon studios">🏢</div>
-      <h3>Studios</h3>
-    </div>
+        {/* STUDIOS */}
+        <div className="action-card modern">
+          <div className="card-header">
+            <div className="card-icon studios">🏢</div>
+            <h3>Studios</h3>
+          </div>
 
-    <div className="action-grid">
-      <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createStudio" ? null : "createStudio")}>
-        <FiPlus /><span>Create</span>
-      </div>
-      <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateStudio" ? null : "updateStudio")}>
-        <FiEdit /><span>Update</span>
-      </div>
-      <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteStudio" ? null : "deleteStudio")}>
-        <FiTrash /><span>Delete</span>
-      </div>
-    </div>
-  </div>
+          <div className="action-grid">
+            <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createStudio" ? null : "createStudio")}>
+              <FiPlus /><span>Create</span>
+            </div>
+            <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateStudio" ? null : "updateStudio")}>
+              <FiEdit /><span>Update</span>
+            </div>
+            <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteStudio" ? null : "deleteStudio")}>
+              <FiTrash /><span>Delete</span>
+            </div>
+          </div>
+        </div>
 
-  {/* BRANCHES */}
-  <div className="action-card modern">
-    <div className="card-header">
-      <div className="card-icon branches">📍</div>
-      <h3>Branches</h3>
-    </div>
+        {/* BRANCHES */}
+        <div className="action-card modern">
+          <div className="card-header">
+            <div className="card-icon branches">📍</div>
+            <h3>Branches</h3>
+          </div>
 
-    <div className="action-grid">
-      <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createBranch" ? null : "createBranch")}>
-        <FiPlus /><span>Create</span>
-      </div>
-      <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateBranch" ? null : "updateBranch")}>
-        <FiEdit /><span>Update</span>
-      </div>
-      <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteBranch" ? null : "deleteBranch")}>
-        <FiTrash /><span>Delete</span>
-      </div>
-    </div>
-  </div>
+          <div className="action-grid">
+            <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createBranch" ? null : "createBranch")}>
+              <FiPlus /><span>Create</span>
+            </div>
+            <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateBranch" ? null : "updateBranch")}>
+              <FiEdit /><span>Update</span>
+            </div>
+            <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteBranch" ? null : "deleteBranch")}>
+              <FiTrash /><span>Delete</span>
+            </div>
+          </div>
+        </div>
 
-  {/* BATCHES */}
-  <div className="action-card modern">
-    <div className="card-header">
-      <div className="card-icon batches">🕺</div>
-      <h3>Batches</h3>
-    </div>
+        {/* BATCHES */}
+        <div className="action-card modern">
+          <div className="card-header">
+            <div className="card-icon batches">🕺</div>
+            <h3>Batches</h3>
+          </div>
 
-    <div className="action-grid">
-      <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createBatch" ? null : "createBatch")}>
-        <FiPlus /><span>Create</span>
-      </div>
-      <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateBatch" ? null : "updateBatch")}>
-        <FiEdit /><span>Update</span>
-      </div>
-      <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteBatch" ? null : "deleteBatch")}>
-        <FiTrash /><span>Delete</span>
-      </div>
-    </div>
-  </div>
+          <div className="action-grid">
+            <div className="action-tile create" onClick={() => setActiveForm(activeForm === "createBatch" ? null : "createBatch")}>
+              <FiPlus /><span>Create</span>
+            </div>
+            <div className="action-tile update" onClick={() => setActiveForm(activeForm === "updateBatch" ? null : "updateBatch")}>
+              <FiEdit /><span>Update</span>
+            </div>
+            <div className="action-tile delete" onClick={() => setActiveForm(activeForm === "deleteBatch" ? null : "deleteBatch")}>
+              <FiTrash /><span>Delete</span>
+            </div>
+          </div>
+        </div>
 
-</div>
+      </div>
 
       {/* User Form */}
-      {activeForm === "createUser" &&  (
+      {activeForm === "createUser" && (
         <form className="create-form" onSubmit={handleCreateUser}>
           <h3>Create New User
             <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
@@ -2488,64 +2494,42 @@ function DataOperations() {
       )}
 
       {/* Data Cards */}
+
+      <h3 className="section-title">Data Export</h3>
       <div className="data-operations-sections">
-        <DataCard
-          title="Dance Studios"
-          type="studios"
-          endpoint="studios"
-          onDownload={handleDownload}
-        />
-        <DataCard
-          title="Platform Users"
-          type="users"
-          endpoint="users"
-          onDownload={handleDownload}
-        />
-        <DataCard
-          title="Dance Styles"
-          type="dancestyle"
-          endpoint="demographics/dancestyle"
-          onDownload={handleDownload}
-        />
-        <DataCard
-          title="Countries"
-          type="country"
-          endpoint="demographics/country"
-          onDownload={handleDownload}
-        />
-        <DataCard
-          title="States"
-          type="state"
-          endpoint="demographics/state"
-          onDownload={handleDownload}
-        />
-        <DataCard
-          title="Cities"
-          type="city"
-          endpoint="demographics/city"
-          onDownload={handleDownload}
-        />
-        <DataCard
-          title="Coupons"
-          type="coupon"
-          endpoint="coupons"
-          onDownload={handleDownload}
-        />
+        <DataCard title="Dance Studios" type="studios" endpoint="studios" onDownload={handleDownload} />
+        <DataCard title="Platform Users" type="users" endpoint="users" onDownload={handleDownload} />
+        <DataCard title="Dance Styles" type="dancestyle" endpoint="demographics/dancestyle" onDownload={handleDownload} />
+        <DataCard title="Countries" type="country" endpoint="demographics/country" onDownload={handleDownload} />
+        <DataCard title="States" type="state" endpoint="demographics/state" onDownload={handleDownload} />
+        <DataCard title="Cities" type="city" endpoint="demographics/city" onDownload={handleDownload} />
+        <DataCard title="Coupons" type="coupon" endpoint="coupons" onDownload={handleDownload} />
       </div>
+
     </div>
   );
 }
-<h3 className="section-title">Data Export</h3>
+const iconMap = {
+  users: <FiUsers />,
+  studios: <FiHome />,
+  dancestyle: <FiTag />,
+  country: <FiGlobe />,
+  state: <FiMap />,
+  city: <FiMapPin />,
+  coupon: <FiTag />,
+};
+
 const DataCard = ({ title, type, endpoint, onDownload }) => (
   <div className={`data-card-modern ${type}`}>
     
     <div className="data-card-header">
       <div className="data-card-icon">
-        <FiDownloadCloud />
+        {iconMap[type] || <FiDownloadCloud />}
       </div>
-      <div>
+
+      <div className="data-card-text">
         <h3>{title}</h3>
-        <p>Export all {title.toLowerCase()} data</p>
+        <p>Export all {title.toLowerCase()}</p>
       </div>
     </div>
 
@@ -2553,7 +2537,7 @@ const DataCard = ({ title, type, endpoint, onDownload }) => (
       className="data-card-btn"
       onClick={() => onDownload(type, endpoint)}
     >
-      <FiDownloadCloud /> Download CSV
+      <FiDownloadCloud /> Download
     </button>
 
   </div>

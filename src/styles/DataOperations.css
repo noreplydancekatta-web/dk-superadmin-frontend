@@ -21,8 +21,8 @@
 
 .data-operations-sections {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
   margin-top: 20px;
 }
 
@@ -261,8 +261,6 @@
 
 
 .data-card-modern {
-  width: 100%;
-  max-width: 100%;
   padding: 16px;
   border-radius: 16px;
   background: #ffffff;
@@ -332,7 +330,7 @@
 /* BUTTON */
 .data-card-btn {
   width: fit-content;
-  padding: 8px 14px;
+  padding: 8px 12px;
   font-size: 13px;
   display: flex;
   align-items: center;
@@ -371,4 +369,14 @@
 
 .data-card-modern.city .data-card-icon {
   background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+.data-card-text h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.data-card-text p {
+  font-size: 12px;
+  color: #888;
 }
