@@ -208,5 +208,7 @@
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+  filter: invert(0) brightness(0); /* makes it black */
+  opacity: 1;
+  cursor: pointer;
 }
