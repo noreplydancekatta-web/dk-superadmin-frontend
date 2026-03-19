@@ -2540,16 +2540,25 @@ function DataOperations() {
 }
 
 const DataCard = ({ title, type, endpoint, onDownload }) => (
-  <div className="data-operations-card">
-    <h3>{title}</h3>
-    <div className="button-row">
-      <button
-        className="data-operations-btn download"
-        onClick={() => onDownload(type, endpoint)}
-      >
-        <FiDownloadCloud className="icon" /> Download CSV
-      </button>
+  <div className="data-card-modern">
+    
+    <div className="data-card-header">
+      <div className="data-card-icon">
+        <FiDownloadCloud />
+      </div>
+      <div>
+        <h3>{title}</h3>
+        <p>Export all {title.toLowerCase()} data</p>
+      </div>
     </div>
+
+    <button
+      className="data-card-btn"
+      onClick={() => onDownload(type, endpoint)}
+    >
+      <FiDownloadCloud /> Download CSV
+    </button>
+
   </div>
 );
 
