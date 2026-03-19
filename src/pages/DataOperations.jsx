@@ -2538,9 +2538,9 @@ function DataOperations() {
     </div>
   );
 }
-
+<h3 className="section-title">Data Export</h3>
 const DataCard = ({ title, type, endpoint, onDownload }) => (
-  <div className="data-card-modern">
+  <div className={`data-card-modern ${type}`}>
     
     <div className="data-card-header">
       <div className="data-card-icon">

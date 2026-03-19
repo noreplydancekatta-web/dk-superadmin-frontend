@@ -26,17 +26,6 @@
   flex-direction: column;
 }
 
-.data-operations-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-width: 400px;
-  align-items: center;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-}
 
 .data-operations-card:hover {
   transform: translateY(-4px);
@@ -279,15 +268,31 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 280px;
+  min-height: 140px; /* NEW */
   transition: all 0.25s ease;
 }
-
+.data-card-btn:active {
+  transform: scale(0.97);
+}
 .data-card-modern:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin: 10px 0 10px;
+}
+
+.data-card-modern:hover .data-card-icon {
+  transform: scale(1.1);
+}
+
+.data-card-icon {
+  transition: transform 0.2s ease;
+}
 /* HEADER */
 .data-card-header {
   display: flex;
@@ -349,3 +354,14 @@
 
 
 
+.data-card-modern.users .data-card-icon {
+  background: linear-gradient(135deg, #3e74fb, #1c5bfc);
+}
+
+.data-card-modern.studios .data-card-icon {
+  background: linear-gradient(135deg, #00b894, #00a383);
+}
+
+.data-card-modern.city .data-card-icon {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+}
