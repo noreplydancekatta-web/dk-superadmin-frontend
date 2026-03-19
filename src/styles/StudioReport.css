@@ -1,124 +1,51 @@
+.studio-report-page {
+  color-scheme: light; /* forces browser to treat this as light UI */
+}
 :root {
-  --bg-page: #f9fafb;
-  --bg-card: #ffffff;
+  --text-primary: #111827;   /* strong text */
+  --text-secondary: #6b7280; /* muted text */
   --border: #e5e7eb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --input-bg: #ffffff;
+  --bg-card: #ffffff;
   --accent: #3e74fb;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-page: #0f172a;
-    --bg-card: #111827;
-    --border: #1f2937;
-    --text-primary: #e5e7eb;
-    --text-secondary: #9ca3af;
-    --input-bg: #020617;
-    --accent: #3b82f6;
-  }
-}
-
-/* PAGE */
 .studio-report-page {
   padding: 32px 40px;
-  background: var(--bg-page);
+  background: #f9fafb;
   min-height: 100vh;
-}
-
-/* WRAPPER */
-.studio-report-wrapper {
-  max-width: 720px;
+  color-scheme: light;
 }
 
 /* HEADER */
 .studio-report-header h2 {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+  color: #111827;
 }
 
 .studio-report-header p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
+  color: #6b7280;
 }
 
 /* PANEL */
 .studio-report-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
 }
 
-/* ROW */
-.studio-report-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-/* FIELD */
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.field.full {
-  margin-top: 16px;
-}
-
+/* LABEL */
 .field label {
-  font-size: 13px;
-  color: var(--text-secondary);
+  color: #6b7280;
 }
 
 /* INPUT */
 .field input,
 .field select {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--input-bg);
-  color: var(--text-primary);
-  font-size: 14px;
-  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
 }
 
-.field input:focus,
-.field select:focus {
-  border-color: var(--accent);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(62, 116, 251, 0.15);
-}
-
-/* ACTION */
-.actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
-}
-
+/* BUTTON */
 .actions button {
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: none;
-  background: var(--accent);
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.actions button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-.actions button:active {
-  transform: scale(0.98);
+  background: #3e74fb;
+  color: #ffffff;
 }
