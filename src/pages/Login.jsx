@@ -41,9 +41,14 @@ const Login = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // prevent page reload
+    handleLogin();
+  };
+
   return (
     <div className="login-page">
-      <div className="login-card">
+      <form className="login-card" onSubmit={handleSubmit}>
         <h2>Admin Login</h2>
 
         <div className="form-group">
@@ -57,39 +62,39 @@ const Login = () => {
         </div>
 
         <div className="form-group">
-  <label>Password</label>
+          <label>Password</label>
 
-  <div style={{ position: "relative" }}>
-    <input
-      type={showPassword ? "text" : "password"}
-      placeholder="••••••••"
-      value={password}
-      style={{ width: "370px" }} 
-      onChange={(e) => setPassword(e.target.value)}
-    />
+          <div style={{ position: "relative" }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              value={password}
+              style={{ width: "370px" }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-    <span
-      onClick={() => setShowPassword(!showPassword)}
-      style={{
-        position: "absolute",
-        right: "12px",
-        top: "50%",
-        transform: "translateY(-50%)",
-        cursor: "pointer",
-        fontSize: "16px",
-        userSelect: "none"
-      }}
-      
-    >
-      {showPassword ? "🙈" : "👁️"}
-    </span>
-  </div>
-</div>
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                fontSize: "16px",
+                userSelect: "none"
+              }}
 
-        <button className="primary-btn" onClick={handleLogin} disabled={loading}>
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" className="primary-btn" disabled={loading}>
           {loading ? <span className="loader"></span> : 'Login'}
         </button>
-      </div>
+      </form>
     </div>
   );
 };
