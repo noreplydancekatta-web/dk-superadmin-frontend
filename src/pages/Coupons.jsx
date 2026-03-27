@@ -82,72 +82,72 @@ function Coupons() {
   };
 
   const handleGenerate = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const { code, type, value, studioEmail, startDate, endDate } = newCoupon;
+    const { code, type, value, studioEmail, startDate, endDate } = newCoupon;
 
-  const studio = studios.find(s => s.contactEmail === studioEmail);
+    const studio = studios.find(s => s.contactEmail === studioEmail);
 
-  const today = new Date().setHours(0, 0, 0, 0);
-  const start = new Date(startDate).setHours(0, 0, 0, 0);
-  const end = new Date(endDate).setHours(0, 0, 0, 0);
+    const today = new Date().setHours(0, 0, 0, 0);
+    const start = new Date(startDate).setHours(0, 0, 0, 0);
+    const end = new Date(endDate).setHours(0, 0, 0, 0);
 
-  if (type === "Studio Specific" && !studio) {
-    alert("Studio not found for the entered email");
-    return;
-  }
+    if (type === "Studio Specific" && !studio) {
+      alert("Studio not found for the entered email");
+      return;
+    }
 
-  if (
-    !code ||
-    !value ||
-    !startDate ||
-    !endDate ||
-    (type === "Studio Specific" && !studioEmail)
-  ) {
-    alert("Please fill all required fields.");
-    return;
-  }
+    if (
+      !code ||
+      !value ||
+      !startDate ||
+      !endDate ||
+      (type === "Studio Specific" && !studioEmail)
+    ) {
+      alert("Please fill all required fields.");
+      return;
+    }
 
-  if (start < today || end < today) {
-    alert("Start and End dates must be today or in the future.");
-    return;
-  }
+    if (start < today || end < today) {
+      alert("Start and End dates must be today or in the future.");
+      return;
+    }
 
-  if (end < start) {
-    alert("End Date must be after Start Date.");
-    return;
-  }
+    if (end < start) {
+      alert("End Date must be after Start Date.");
+      return;
+    }
 
-  const couponData = {
-    couponCode: code,
-    couponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
-    discountPercent: value,
-    studioID: type === "Studio Specific" ? studio._id : null,
-    startDate: startDate,
-    expiryDate: endDate,
-    isActive: true,
+    const couponData = {
+      couponCode: code,
+      couponType: type === "Studio Specific" ? "StudioSpecific" : "PlatformWide",
+      discountPercent: value,
+      studioID: type === "Studio Specific" ? studio._id : null,
+      startDate: startDate,
+      expiryDate: endDate,
+      isActive: true,
+    };
+
+    try {
+      await API.post("/api/coupons", couponData);
+      alert("Coupon Generated Successfully!");
+      fetchCoupons();
+
+      setNewCoupon({
+        code: "",
+        type: "Studio Specific",
+        studioEmail: "",
+        studioName: "",
+        value: "",
+        startDate: "",
+        endDate: "",
+      });
+
+    } catch (err) {
+      console.error("Error generating coupon:", err);
+      alert("Failed to generate coupon");
+    }
   };
-
-  try {
-    await API.post("/api/coupons", couponData);
-    alert("Coupon Generated Successfully!");
-    fetchCoupons();
-
-    setNewCoupon({
-      code: "",
-      type: "Studio Specific",
-      studioEmail: "",
-      studioName: "",
-      value: "",
-      startDate: "",
-      endDate: "",
-    });
-
-  } catch (err) {
-    console.error("Error generating coupon:", err);
-    alert("Failed to generate coupon");
-  }
-};
 
   const handleDisableCoupon = async (id) => {
     try {
@@ -325,28 +325,30 @@ function Coupons() {
             </tr>
           </thead>
           <tbody>
-            {coupons.map((coupon) => (
-              <tr key={coupon._id}>
-                <td>{coupon.couponCode}</td>
-                <td>{coupon.couponType === "StudioSpecific" ? "Studio Specific" : "Platform Wide"}</td>
-                <td>{coupon.discountPercent}%</td>
-                <td>
-                  {coupon.studioID
-                    ? studios.find(s => s._id === coupon.studioID)?.studioName || "N/A"
-                    : "All"}
-                </td>
-                <td>{new Date(coupon.startDate).toLocaleDateString()}</td>
-                <td>{new Date(coupon.expiryDate).toLocaleDateString()}</td>
-                <td>
-                  <span className={`status ${coupon.isActive ? "active" : "disabled"}`}>
-                    {coupon.isActive ? "Active" : "Disabled"}
-                  </span>
-                </td>
-                <td>
-                  <button className="view-btn" onClick={() => handleView(coupon)}>View</button>
-                </td>
-              </tr>
-            ))}
+            {[...coupons]
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((coupon) => (
+                <tr key={coupon._id}>
+                  <td>{coupon.couponCode}</td>
+                  <td>{coupon.couponType === "StudioSpecific" ? "Studio Specific" : "Platform Wide"}</td>
+                  <td>{coupon.discountPercent}%</td>
+                  <td>
+                    {coupon.studioID
+                      ? studios.find(s => s._id === coupon.studioID)?.studioName || "N/A"
+                      : "All"}
+                  </td>
+                  <td>{new Date(coupon.startDate).toLocaleDateString()}</td>
+                  <td>{new Date(coupon.expiryDate).toLocaleDateString()}</td>
+                  <td>
+                    <span className={`status ${coupon.isActive ? "active" : "disabled"}`}>
+                      {coupon.isActive ? "Active" : "Disabled"}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="view-btn" onClick={() => handleView(coupon)}>View</button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
