@@ -21,11 +21,20 @@ function Transactions() {
   };
 
   const filtered = transactions.filter((tx) => {
-    const studentName = `${tx.studentId?.firstName || ""} ${
-      tx.studentId?.lastName || ""
-    }`.toLowerCase();
+    const studentName = (
+      tx.studentName ||
+      `${tx.studentId?.firstName || ""} ${tx.studentId?.lastName || ""}`
+    ).toLowerCase();
+
+      const studentEmail = (
+    tx.studentEmail || tx.studentId?.email || ""
+  ).toLowerCase();
+
+
     const studioName = tx.studioName?.toLowerCase() || "";
-    const transactionId = tx.paymentDetails?.transactionId?.toLowerCase() || "";
+
+    const transactionId =
+      tx.paymentDetails?.transactionId?.toLowerCase() || "";
 
     return (
       studentName.includes(searchQuery.toLowerCase()) ||
@@ -68,7 +77,7 @@ function Transactions() {
               <th>Status</th>
               <th>Mode</th>
               <th>Date</th>
-              
+
             </tr>
           </thead>
           <tbody>
@@ -76,9 +85,11 @@ function Transactions() {
               <tr key={index}>
                 <td>{tx.paymentDetails?.transactionId}</td>
                 <td>
-                  {tx.studentId?.firstName} {tx.studentId?.lastName}
+                  {tx.studentName || `${tx.studentId?.firstName || ""} ${tx.studentId?.lastName || ""}`}
                 </td>
-                <td>{tx.studentId?.email}</td>
+                <td>
+                  {tx.studentEmail || tx.studentId?.email || "N/A"}
+                </td>
                 <td>{tx.studioName}</td>
                 <td>{tx.batchId?.batchName}</td>
                 <td>₹ {tx.paymentDetails?.amountPaid}</td>
@@ -104,7 +115,7 @@ function Transactions() {
                     ? new Date(tx.transactionDate).toISOString().split("T")[0]
                     : "N/A"}
                 </td>
-               
+
               </tr>
             ))}
           </tbody>
