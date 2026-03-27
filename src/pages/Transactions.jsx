@@ -26,9 +26,9 @@ function Transactions() {
       `${tx.studentId?.firstName || ""} ${tx.studentId?.lastName || ""}`
     ).toLowerCase();
 
-      const studentEmail = (
-    tx.studentEmail || tx.studentId?.email || ""
-  ).toLowerCase();
+    const studentEmail = (
+      tx.studentEmail || tx.studentId?.email || ""
+    ).toLowerCase();
 
 
     const studioName = tx.studioName?.toLowerCase() || "";
@@ -112,7 +112,15 @@ function Transactions() {
                 <td>{tx.mode}</td>
                 <td>
                   {tx.transactionDate
-                    ? new Date(tx.transactionDate).toISOString().split("T")[0]
+                    ? new Date(tx.transactionDate).toLocaleString("en-IN", {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: true,
+                    })
                     : "N/A"}
                 </td>
 
