@@ -21,14 +21,8 @@ function Transactions() {
   };
 
   const filtered = transactions.filter((tx) => {
-    const studentName = (
-      tx.studentName ||
-      `${tx.studentId?.firstName || ""} ${tx.studentId?.lastName || ""}`
-    ).toLowerCase();
-
-    const studentEmail = (
-      tx.studentEmail || tx.studentId?.email || ""
-    ).toLowerCase();
+    const studentName = (tx.studentName || "").toLowerCase();
+    const studentEmail = (tx.studentEmail || "").toLowerCase();
 
 
     const studioName = tx.studioName?.toLowerCase() || "";
@@ -84,14 +78,10 @@ function Transactions() {
             {filtered.map((tx, index) => (
               <tr key={index}>
                 <td>{tx.paymentDetails?.transactionId}</td>
-                <td>
-                  {tx.studentName || `${tx.studentId?.firstName || ""} ${tx.studentId?.lastName || ""}`}
-                </td>
-                <td>
-                  {tx.studentEmail || tx.studentId?.email || "N/A"}
-                </td>
+                <td>{tx.studentName || "Unknown"}</td>
+                <td>{tx.studentEmail || "N/A"}</td>
                 <td>{tx.studioName}</td>
-                <td>{tx.batchId?.batchName}</td>
+                <td>{tx.batchName || "N/A"}</td>
                 <td>₹ {tx.paymentDetails?.amountPaid}</td>
                 <td>
                   {tx.paymentDetails?.discountPercent ??
