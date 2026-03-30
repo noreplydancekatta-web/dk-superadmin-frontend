@@ -5,6 +5,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Dashboard from "./pages/Dashboard";
 import Demographics from "./pages/Demographics";
 import Studios from "./pages/Studios";
@@ -23,6 +26,14 @@ function App() {
   return (
     <Router>
       <Layout>
+        <ToastContainer
+          position="top-right"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+        />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route

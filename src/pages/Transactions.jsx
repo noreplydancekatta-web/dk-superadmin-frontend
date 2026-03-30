@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "../styles/Transactions.css";
+import { toast } from "react-toastify";
 import API from "../axios";
 
 function Transactions() {
@@ -37,6 +38,25 @@ function Transactions() {
     );
   });
 
+  const renderCopyCell = (value, { shorten = false } = {}) => {
+  if (!value) return "N/A";
+
+  const displayValue = shorten ? value.slice(-6) : value;
+
+  return (
+    <span
+      title={`Click to copy: ${value}`}
+      onClick={() => {
+        navigator.clipboard.writeText(value);
+        toast.success("Copied!");
+      }}
+      style={{ cursor: "pointer" }}
+    >
+      {displayValue}
+    </span>
+  );
+};
+
   return (
     <div className="transactions-page">
       <h2>Transactions</h2>
@@ -59,6 +79,7 @@ function Transactions() {
           <thead>
             <tr>
               <th>Transaction ID</th>
+              <th>User ID</th>
               <th>User</th>
               <th>Email</th>
               <th>Studio</th>
@@ -77,9 +98,16 @@ function Transactions() {
           <tbody>
             {filtered.map((tx, index) => (
               <tr key={index}>
-                <td>{tx.paymentDetails?.transactionId}</td>
+                <td>
+                  {renderCopyCell(tx.paymentDetails?.transactionId, { shorten: true })}
+                </td>
+                <td>
+                  {renderCopyCell(tx.studentId, { shorten: true })}
+                </td>
                 <td>{tx.studentName || "Unknown"}</td>
-                <td>{tx.studentEmail || "N/A"}</td>
+                <td>
+                  {renderCopyCell(tx.studentEmail)}
+                </td>
                 <td>{tx.studioName}</td>
                 <td>{tx.batchName || "N/A"}</td>
                 <td>₹ {tx.paymentDetails?.amountPaid}</td>
