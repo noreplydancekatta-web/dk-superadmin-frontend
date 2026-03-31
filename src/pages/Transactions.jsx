@@ -83,6 +83,7 @@ function Transactions() {
               <th>User</th>
               <th>Email</th>
               <th>Studio</th>
+              <th>Branch</th>
               <th>Batch</th>
               <th>Amount Paid</th>
               <th>Discount %</th>
@@ -109,6 +110,7 @@ function Transactions() {
                   {renderCopyCell(tx.studentEmail)}
                 </td>
                 <td>{tx.studioName}</td>
+                <td>{tx.branchName || "N/A"}</td>
                 <td>{tx.batchName || "N/A"}</td>
                 <td>₹ {tx.paymentDetails?.amountPaid}</td>
                 <td>
