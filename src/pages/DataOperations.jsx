@@ -147,6 +147,9 @@ function DataOperations() {
 
   // ================= Studio State =================
   const [studioOwners, setStudioOwners] = useState([]);
+  const [isOwnerSelected, setIsOwnerSelected] = useState(false);
+  const [isStudioSelectedForUpdate, setIsStudioSelectedForUpdate] = useState(false);
+  const [isStudioSelectedForDelete, setIsStudioSelectedForDelete] = useState(false);
   const [newStudio, setNewStudio] = useState({
     ownerId: "",
     studioName: "",
@@ -986,7 +989,10 @@ function DataOperations() {
               <EmailAutocomplete
                 items={studioOwners}
                 value={newStudio.ownerId}
-                onChange={(owner) => setNewStudio({ ...newStudio, ownerId: owner?._id || "" })}
+                onChange={(owner) => {
+                  setNewStudio({ ...newStudio, ownerId: owner?._id || "" });
+                  setIsOwnerSelected(!!owner);
+                }}
                 placeholder="Type owner email..."
                 displayField="email"
                 required
@@ -1000,6 +1006,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, studioName: e.target.value })
                 }
+                disabled={!isOwnerSelected}
                 required
               />
             </label>
@@ -1014,6 +1021,7 @@ function DataOperations() {
                     registeredAddress: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
                 required
               />
             </label>
@@ -1025,6 +1033,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, contactEmail: e.target.value })
                 }
+                disabled={!isOwnerSelected}
                 required
               />
             </label>
@@ -1036,6 +1045,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, contactNumber: e.target.value })
                 }
+                disabled={!isOwnerSelected}
                 required
               />
             </label>
@@ -1047,6 +1057,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, gstNumber: e.target.value })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1057,6 +1068,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, panNumber: e.target.value })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label className="file-label">
@@ -1071,6 +1083,7 @@ function DataOperations() {
                     aadharFrontPhoto: e.target.files[0],
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label className="file-label">
@@ -1085,6 +1098,7 @@ function DataOperations() {
                     aadharBackPhoto: e.target.files[0],
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1098,6 +1112,7 @@ function DataOperations() {
                     bankAccountNumber: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1111,6 +1126,7 @@ function DataOperations() {
                     bankIfscCode: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1123,6 +1139,7 @@ function DataOperations() {
                     studioIntroduction: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label className="file-label">
@@ -1134,6 +1151,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, logoUrl: e.target.files[0] })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label className="file-label">
@@ -1149,6 +1167,7 @@ function DataOperations() {
                     studioPhotos: Array.from(e.target.files),
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1162,6 +1181,7 @@ function DataOperations() {
                     studioWebsite: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1175,6 +1195,7 @@ function DataOperations() {
                     studioFacebook: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1188,6 +1209,7 @@ function DataOperations() {
                     studioYoutube: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
             <label>
@@ -1201,6 +1223,7 @@ function DataOperations() {
                     studioInstagram: e.target.value,
                   })
                 }
+                disabled={!isOwnerSelected}
               />
             </label>
           </div>
@@ -1806,10 +1829,12 @@ function DataOperations() {
                     setSelectedStudioId(studio._id);
                     setSelectedStudio(studio);
                     setNewStudio(studio);
+                    setIsStudioSelectedForUpdate(true);
                   } else {
                     setSelectedStudioId("");
                     setSelectedStudio(null);
                     setNewStudio({});
+                    setIsStudioSelectedForUpdate(false);
                   }
                 }}
                 placeholder="Type studio email..."
@@ -1828,6 +1853,7 @@ function DataOperations() {
                     contactEmail: e.target.value,
                   })
                 }
+                disabled={!isStudioSelectedForUpdate}
                 required
               />
             </label>
@@ -1843,6 +1869,7 @@ function DataOperations() {
                     registeredAddress: e.target.value,
                   })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1854,6 +1881,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, contactNumber: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1865,6 +1893,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, gstNumber: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1876,6 +1905,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, panNumber: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1890,6 +1920,7 @@ function DataOperations() {
                     bankAccountNumber: e.target.value,
                   })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1901,6 +1932,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, bankIfscCode: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1914,6 +1946,7 @@ function DataOperations() {
                     studioIntroduction: e.target.value,
                   })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1925,6 +1958,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, studioWebsite: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1936,6 +1970,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, studioFacebook: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1947,6 +1982,7 @@ function DataOperations() {
                 onChange={(e) =>
                   setNewStudio({ ...newStudio, studioYoutube: e.target.value })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
 
@@ -1961,10 +1997,11 @@ function DataOperations() {
                     studioInstagram: e.target.value,
                   })
                 }
+                disabled={!isStudioSelectedForUpdate}
               />
             </label>
           </div>
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="submit-btn" disabled={!isStudioSelectedForUpdate}>
             Update Studio
           </button>
         </form>
@@ -1981,14 +2018,17 @@ function DataOperations() {
             <EmailAutocomplete
               items={studioOwners}
               value={selectedStudioId}
-              onChange={(studio) => setSelectedStudioId(studio?._id || "")}
+              onChange={(studio) => {
+                setSelectedStudioId(studio?._id || "");
+                setIsStudioSelectedForDelete(!!studio);
+              }}
               placeholder="Type studio email..."
               displayField="contactEmail"
               required
             />
           </label>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="submit-btn" disabled={!isStudioSelectedForDelete}>
             Delete Studio
           </button>
         </form>
