@@ -42,3 +42,17 @@
 .autocomplete-dropdown li:last-child {
   border-bottom: none;
 }
+
+.autocomplete-no-match {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 0 0 5px 5px;
+  padding: 10px;
+  font-size: 13px;
+  color: #856404;
+  z-index: 1000;
+}

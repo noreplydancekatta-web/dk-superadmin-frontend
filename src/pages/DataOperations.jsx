@@ -982,13 +982,14 @@ function DataOperations() {
           </h3>
           <div className="form-grid">
             <label>
-              Select Owner (Type Email)
+              Type User Email
               <EmailAutocomplete
                 items={studioOwners}
                 value={newStudio.ownerId}
-                onChange={(owner) => setNewStudio({ ...newStudio, ownerId: owner._id })}
+                onChange={(owner) => setNewStudio({ ...newStudio, ownerId: owner?._id || "" })}
                 placeholder="Type owner email..."
                 displayField="email"
+                required
               />
             </label>
             <label>
@@ -1796,17 +1797,24 @@ function DataOperations() {
           </h3>
           <div className="form-grid">
             <label>
-              Select Studio (Type Email)
+              Type Studio Email
               <EmailAutocomplete
                 items={studioOwners}
                 value={selectedStudioId}
                 onChange={(studio) => {
-                  setSelectedStudioId(studio._id);
-                  setSelectedStudio(studio);
-                  setNewStudio(studio);
+                  if (studio) {
+                    setSelectedStudioId(studio._id);
+                    setSelectedStudio(studio);
+                    setNewStudio(studio);
+                  } else {
+                    setSelectedStudioId("");
+                    setSelectedStudio(null);
+                    setNewStudio({});
+                  }
                 }}
                 placeholder="Type studio email..."
                 displayField="contactEmail"
+                required
               />
             </label>
             <label>
@@ -1969,13 +1977,14 @@ function DataOperations() {
           </h3>
 
           <label>
-            Select Studio (Type Email)
+            Type Studio Email
             <EmailAutocomplete
               items={studioOwners}
               value={selectedStudioId}
-              onChange={(studio) => setSelectedStudioId(studio._id)}
+              onChange={(studio) => setSelectedStudioId(studio?._id || "")}
               placeholder="Type studio email..."
               displayField="contactEmail"
+              required
             />
           </label>
 

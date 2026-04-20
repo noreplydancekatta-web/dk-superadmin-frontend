@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EmailAutocomplete.css";
 
-function EmailAutocomplete({ items, value, onChange, placeholder, displayField = "email" }) {
+function EmailAutocomplete({ items, value, onChange, placeholder, displayField = "email", required = false }) {
   const [inputValue, setInputValue] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +21,8 @@ function EmailAutocomplete({ items, value, onChange, placeholder, displayField =
   const handleInputChange = (e) => {
     const val = e.target.value;
     setInputValue(val);
+    setSelectedItem(null);
+    onChange(null);
     
     if (val.trim()) {
       const filtered = items.filter((item) =>
@@ -35,9 +38,12 @@ function EmailAutocomplete({ items, value, onChange, placeholder, displayField =
 
   const handleSelect = (item) => {
     setInputValue(item[displayField]);
+    setSelectedItem(item);
     onChange(item);
     setShowDropdown(false);
   };
+
+  const isValid = !required || selectedItem !== null;
 
   return (
     <div className="email-autocomplete" ref={wrapperRef}>
@@ -47,6 +53,8 @@ function EmailAutocomplete({ items, value, onChange, placeholder, displayField =
         onChange={handleInputChange}
         placeholder={placeholder}
         onFocus={() => inputValue && setShowDropdown(true)}
+        required={required}
+        style={{ borderColor: !isValid && inputValue ? '#ff4444' : '#ddd' }}
       />
       {showDropdown && filteredItems.length > 0 && (
         <ul className="autocomplete-dropdown">
@@ -58,6 +66,9 @@ function EmailAutocomplete({ items, value, onChange, placeholder, displayField =
             </li>
           ))}
         </ul>
+      )}
+      {inputValue && !selectedItem && filteredItems.length === 0 && (
+        <div className="autocomplete-no-match">No matching email found</div>
       )}
     </div>
   );
