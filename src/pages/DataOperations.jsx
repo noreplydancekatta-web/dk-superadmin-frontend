@@ -13,6 +13,7 @@ import {
   FiTag
 } from "react-icons/fi";
 import API from "../axios";
+import EmailAutocomplete from "../components/EmailAutocomplete";
 import "../styles/DataOperations.css";
 
 function DataOperations() {
@@ -981,21 +982,14 @@ function DataOperations() {
           </h3>
           <div className="form-grid">
             <label>
-              Select Owner
-              <select
+              Select Owner (Type Email)
+              <EmailAutocomplete
+                items={studioOwners}
                 value={newStudio.ownerId}
-                onChange={(e) =>
-                  setNewStudio({ ...newStudio, ownerId: e.target.value })
-                }
-                required
-              >
-                <option value="">-- Select Owner --</option>
-                {studioOwners.map((owner) => (
-                  <option key={owner._id} value={owner._id}>
-                    {owner.firstName} {owner.lastName} ({owner.email})
-                  </option>
-                ))}
-              </select>
+                onChange={(owner) => setNewStudio({ ...newStudio, ownerId: owner._id })}
+                placeholder="Type owner email..."
+                displayField="email"
+              />
             </label>
             <label>
               Studio Name
@@ -1564,6 +1558,7 @@ function DataOperations() {
               type="email"
               value={fetchEmail}
               onChange={(e) => setFetchEmail(e.target.value)}
+              placeholder="Type user email..."
               required
             />
           </label>
@@ -1784,6 +1779,7 @@ function DataOperations() {
               type="email"
               value={fetchEmail}
               onChange={(e) => setFetchEmail(e.target.value)}
+              placeholder="Type user email..."
               required
             />
           </label>
@@ -1799,25 +1795,20 @@ function DataOperations() {
             <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
           </h3>
           <div className="form-grid">
-            <select
-              value={selectedStudioId}
-              onChange={(e) => {
-                const studioId = e.target.value;
-                setSelectedStudioId(studioId);
-                const studio = studioOwners.find((s) => s._id === studioId);
-                if (studio) {
+            <label>
+              Select Studio (Type Email)
+              <EmailAutocomplete
+                items={studioOwners}
+                value={selectedStudioId}
+                onChange={(studio) => {
+                  setSelectedStudioId(studio._id);
                   setSelectedStudio(studio);
-                  setNewStudio(studio); // pre-fill inputs
-                }
-              }}
-            >
-              <option value="">-- Select Studio --</option>
-              {studioOwners.map((studio) => (
-                <option key={studio._id} value={studio._id}>
-                  {studio.studioName} ({studio.contactEmail})
-                </option>
-              ))}
-            </select>
+                  setNewStudio(studio);
+                }}
+                placeholder="Type studio email..."
+                displayField="contactEmail"
+              />
+            </label>
             <label>
               Studio Email
               <input
@@ -1977,18 +1968,16 @@ function DataOperations() {
             <span onClick={() => setActiveForm(null)} className="close-btn">✕</span>
           </h3>
 
-          <select
-            value={selectedStudioId}
-            onChange={(e) => setSelectedStudioId(e.target.value)}
-            required
-          >
-            <option value="">-- Select Studio --</option>
-            {studioOwners.map((studio) => (
-              <option key={studio._id} value={studio._id}>
-                {studio.studioName} ({studio.contactEmail})
-              </option>
-            ))}
-          </select>
+          <label>
+            Select Studio (Type Email)
+            <EmailAutocomplete
+              items={studioOwners}
+              value={selectedStudioId}
+              onChange={(studio) => setSelectedStudioId(studio._id)}
+              placeholder="Type studio email..."
+              displayField="contactEmail"
+            />
+          </label>
 
           <button type="submit" className="submit-btn">
             Delete Studio
